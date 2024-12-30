@@ -1,5 +1,11 @@
+import { Landing } from "./pages";
+
 function App() {
-  return <>App</>;
+  return (
+    <>
+      <Landing />
+    </>
+  );
 }
 
 export default App;
