@@ -1,9 +1,11 @@
-import { Landing } from "./pages";
+import { Landing, Signup, Login } from "./pages";
 
 function App() {
   return (
     <>
-      <Landing />
+      {/* <Landing /> */}
+      {/* <Signup /> */}
+      <Login />
     </>
   );
 }
