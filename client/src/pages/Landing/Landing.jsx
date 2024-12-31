@@ -21,7 +21,10 @@ import feature from "../../assets/feature.png";
 import feature2 from "../../assets/feature2.png";
 import feature3 from "../../assets/feature3.png";
 
+import zenithLogo from "../../assets/zenith.png";
+
 import { Footer } from "../../components";
+import { Link } from "react-router-dom";
 
 const Landing = () => {
   return (
@@ -35,9 +38,11 @@ const Landing = () => {
           <nav>Tutors</nav>
           <nav>Sign up</nav>
         </div>
-        <button className="hidden sm:block border-[1.95px] py-1 px-2 text-blue-500 hover:bg-blue-50 transition-all border-blue-500 rounded-md">
-          Sign up
-        </button>
+        <Link to={`/auth/signup`}>
+          <button className="hidden sm:block border-[1.95px] py-1 px-2 text-blue-500 hover:bg-blue-50 transition-all border-blue-500 rounded-md">
+            Sign up
+          </button>
+        </Link>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -72,23 +77,25 @@ const Landing = () => {
             broke. <strong>That&apos;s all.</strong> Don&apos;t want to be
             broke? Then you&apos;re in the right place.
           </p>
-          <button className="bg-blue-500 text-[.93rem] flex items-center gap-2 hover:bg-blue-600 transition-all font-bold text-[#fefefe] rounded-md py-1 px-2 mt-4">
-            <span>START LEARNING THE SKILLS NEEDED</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2.5}
-              stroke="currentColor"
-              className="size-5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
-              />
-            </svg>
-          </button>
+          <Link to={`/auth/signup`}>
+            <button className="bg-blue-500 text-[.93rem] flex items-center gap-2 hover:bg-blue-600 transition-all font-bold text-[#fefefe] rounded-md py-1 px-2 mt-4">
+              <span>START LEARNING THE SKILLS NEEDED</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2.5}
+                stroke="currentColor"
+                className="size-5"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"
+                />
+              </svg>
+            </button>
+          </Link>
           <div className="my-4 flex items-center gap-2">
             <div className="flex">
               <img
@@ -176,26 +183,10 @@ const Landing = () => {
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veniam
               voluptatum doloremque repellendus, id quod totam. Blanditiis.
             </p>
-            <button className="text-blue-400 mt-4">Start Learning</button>
+            <Link to={`/auth/signup`}>
+              <button className="text-blue-400 mt-4">Start Learning</button>
+            </Link>
           </div>
-          {/* <div>
-            <img src={salesSkill} alt="marketing" className="size-10" />
-            <p>Sales</p>
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veniam
-              voluptatum doloremque repellendus, id quod totam. Blanditiis
-              laboriosam rem repellendus quae.
-            </p>
-          </div>
-          <div>
-            <img src={aiSkill} alt="marketing" className="size-10" />
-            <p>AI</p>
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veniam
-              voluptatum doloremque repellendus, id quod totam. Blanditiis
-              laboriosam rem repellendus quae.
-            </p>
-          </div> */}
         </div>
         <button className="bg-blue-500 hover:bg-blue-600 transition-all mt-12 py-1 px-2 rounded-md text-[#fefefe] font-bold">
           Sign Up To Start Learning
@@ -227,7 +218,7 @@ const Landing = () => {
       <section className="flex flex-col-reverse sm:flex-row gap-[4rem] sm:gap-8 w-full my-6 py-[4rem] px-2 sm:px-6 items-center">
         <div className="w-full sm:w-[40%] h-auto relative">
           <div className="absolute right-[1rem] sm:right-[-1.5rem] top-[-1.5rem] flex items-center gap-3 bg-[#fefefe] py-1 px-2 shadow-lg rounded-md w-max">
-            <p>Icon</p>
+            <img src={zenithLogo} className="size-12" alt="" />
             <div>
               <p className="font-bold text-[.95rem]">Abdul-Hameed Rasheed</p>
               <div className="flex justify-between items-center text-sm">
@@ -252,9 +243,11 @@ const Landing = () => {
             rerum animi quasi delectus ut dolorum! Rem perferendis iusto
             necessitatibus aut. Reprehenderit!
           </p>
-          <button className="bg-blue-500 hover:bg-blue-600 transition-all mt-4 py-1 px-2 rounded-md text-[#fefefe] font-bold">
-            Sign Up To Start Learning
-          </button>
+          <Link to={`/auth/signup`}>
+            <button className="bg-blue-500 hover:bg-blue-600 transition-all mt-4 py-1 px-2 rounded-md text-[#fefefe] font-bold">
+              Sign Up To Start Learning
+            </button>
+          </Link>
         </div>
       </section>
 
@@ -327,9 +320,11 @@ const Landing = () => {
         <p className="mb-6">
           Create a free account in less than 3 minutes and start learning!
         </p>
-        <button className="bg-blue-500 text-[#fefefe] font-semibold p-2 rounded-md">
-          Sign up for free
-        </button>
+        <Link to={`/auth/signup`}>
+          <button className="bg-blue-500 text-[#fefefe] font-semibold p-2 rounded-md">
+            Sign up for free
+          </button>
+        </Link>
       </section>
 
       {/* Footer */}
