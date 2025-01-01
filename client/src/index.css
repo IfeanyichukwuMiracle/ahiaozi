@@ -20,6 +20,22 @@ body {
   width: 1.7rem;
 }
 
+#hero-text {
+  display: none;
+}
+
+@media (max-width: 500px) {
+  #hero-card {
+    display: none;
+  }
+  #hero-text {
+    display: block;
+    margin-top: -5rem;
+    margin-bottom: 1.5rem;
+    padding: 0 0.5rem;
+  }
+}
+
 @media (max-width: 387px) {
   .sales-tag,
   .facebook-tag {
