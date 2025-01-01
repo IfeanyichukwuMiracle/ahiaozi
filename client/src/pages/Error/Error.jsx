@@ -1,3 +1,5 @@
+import { Footer } from "../../components";
+
 const Error = () => {
   return (
     <>
@@ -11,6 +13,7 @@ const Error = () => {
           </a>
         </div>
       </section>
+      <Footer />
     </>
   );
 };
