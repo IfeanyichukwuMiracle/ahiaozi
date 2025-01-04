@@ -7,7 +7,7 @@ const Cart = () => {
       <Header sticky={true} />
 
       {/* cart container */}
-      <section className="py-12 px-2 sm:px-6">
+      <section className="py-12 px-2 sm:px-6 sm:relative">
         <p className="font-bold text-3xl mb-12">Shopping Cart</p>
 
         {/* cart section */}
@@ -17,7 +17,7 @@ const Cart = () => {
               1 Course in cart
             </p>
             <div>
-              {[1].map((course) => {
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((course) => {
                 return (
                   <div
                     key={course}
@@ -37,7 +37,7 @@ const Cart = () => {
                         </p>
                         <p className="text-xs">tutor name</p>
                         <div className="flex items-center gap-2 mt-1">
-                          <p className="bg-amber-300 text-amber-600 rounded-sm p-[.1rem] text-sm">
+                          <p className="bg-amber-300 text-amber-700 rounded-sm py-[.1rem] px-[.2rem] shadow-md text-sm">
                             Latest
                           </p>
                           <p className="text-sm">
@@ -59,7 +59,7 @@ const Cart = () => {
               })}
             </div>
           </div>
-          <div className="w-[100%] sm:w-[30%] border-b border-gray-200">
+          <div className="sm:sticky sm:top-[5.5rem] w-[100%] sm:w-[30%] border-b border-gray-200">
             <p className="font-semibold text-gray-800">Total:</p>
             <p className="text-2xl font-bold">&#8358;90,000</p>
             <button className="bg-blue-600 text-white w-[100%] font-bold my-4 py-2 rounded-sm">
