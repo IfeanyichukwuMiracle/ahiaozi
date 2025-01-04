@@ -15,7 +15,7 @@ const Home = () => {
           className="max-w-[25rem] w-[40%] min-w-[11rem] shadow-xl top-[20%] left-[3%]  sm:top-[25%] sm:left-[5%] p-4 absolute bg-[#fefefe] rounded-md"
         >
           <p
-            className="font-extrabold mb-1 text-lg"
+            className="font-extrabold mb-1 text-xl sm:text-[1.9rem]"
             style={{ fontFamily: "var(--heading-font)" }}
           >
             Relevant Skills At Your Fingertips
@@ -37,7 +37,7 @@ const Home = () => {
       {/* Hero text */}
       <div id="hero-text">
         <p
-          className="font-extrabold mb-1 text-lg"
+          className="font-extrabold mb-1 text-2xl"
           style={{ fontFamily: "var(--heading-font)" }}
         >
           Relevant Skills At Your Fingertips
@@ -52,7 +52,7 @@ const Home = () => {
 
       {/* Courses list */}
       <section className="px-2 sm:px-6">
-        <p className="font-extrabold text-2xl sm:text-3xl mb-4 sm:mb-6">
+        <p className="font-extrabold text-xl sm:text-2xl mb-4 sm:mb-6">
           Recommended For You
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:grid-cols-4">
@@ -66,7 +66,7 @@ const Home = () => {
         </div>
       </section>
       <section className="mt-16 px-2 sm:px-6">
-        <p className="font-extrabold text-2xl sm:text-3xl mb-4 sm:mb-6">
+        <p className="font-extrabold text-xl sm:text-2xl mb-4 sm:mb-6">
           Trending
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:grid-cols-4">

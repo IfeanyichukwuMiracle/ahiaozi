@@ -23,8 +23,18 @@ app.use((err, req, res, next) => {
 async function startServer(uri) {
   try {
     await mongoose.connect(uri);
-    console.log(`DB Connected!`);
+    console.log(`Db connected`);
     app.listen(port, () => console.log(`Server started on port ${port}`));
+
+    // const connection = mongoose.connection;
+    // connection.on("connection", () => {
+    //   console.log(`DB Connected!`);
+    //   app.listen(port, () => console.log(`Server started on port ${port}`));
+    // });
+    // connection.on("error", () => {
+    //   console.log(`Server error occured`);
+    //   process.exit();
+    // });
   } catch (e) {
     console.log(e);
     return;
