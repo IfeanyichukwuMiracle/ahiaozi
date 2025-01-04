@@ -8,8 +8,14 @@ const Learn = () => {
 
       {/* video section */}
       <section className="w-full sm:h-[30rem] overflow-hidden relative group mb-4">
-        <div className="w-full absolute hidden group-hover:block top-0 bg-opacity-40 p-2 sm:px-6 bg-gray-900 text-white h-full">
-          <p>Course name - module name</p>
+        <p className="hidden group-hover:block z-20 text-white p-2 sm:px-6 absolute top-0">
+          Course name - module name
+        </p>
+        <div className="w-full items-center z-10 absolute hidden group-hover:flex top-0 bg-opacity-30 p-2 sm:px-6 bg-gray-900 text-white h-[87%]">
+          <div className="w-full flex justify-between">
+            <button>prev</button>
+            <button>next</button>
+          </div>
         </div>
         <video src={learnVid} controls className="w-[100%] h-[100%]" />
       </section>
