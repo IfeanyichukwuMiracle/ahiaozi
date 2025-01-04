@@ -1,5 +1,5 @@
 import { Card, Footer, Header } from "../../components";
-import courseImg from "../../assets/profile-2.jpg";
+import courseImg from "../../assets/course.jpg";
 
 const Cart = () => {
   return (

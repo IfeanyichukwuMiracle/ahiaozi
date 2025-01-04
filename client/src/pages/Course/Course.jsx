@@ -1,5 +1,5 @@
 import { Card, Footer, Header, Preview } from "../../components";
-import courseImg from "../../assets/profile-1.jpg";
+import courseImg from "../../assets/course-2.jpg";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -76,7 +76,7 @@ const Course = () => {
               <div className="bg-opacity-10 w-full h-[100%] absolute top-0 flex justify-center items-center text-[whitesmoke] font-bold text-xl bg-gray-800">
                 Preview Course
               </div>
-              <img src={courseImg} alt="course name" className="block" />
+              <img src={courseImg} alt="course name" className="block w-full" />
             </div>
             <p className="pt-2 pb-2 sm:pb-0 sm:px-4 font-extrabold text-2xl">
               &#8358; 90,960

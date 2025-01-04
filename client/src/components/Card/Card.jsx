@@ -1,4 +1,4 @@
-import course_img from "../../assets/profile.jpg";
+import course_img from "../../assets/course.jpg";
 
 const Card = () => {
   return (
