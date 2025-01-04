@@ -24,11 +24,13 @@ const Cart = () => {
                     className="flex sm:flex-row flex-col gap-3 justify-between py-4 border-b border-gray-200"
                   >
                     <div className="flex gap-4 items-center">
-                      <img
-                        src={courseImg}
-                        alt="course_name"
-                        className="w-[7rem] h-[5.5rem]"
-                      />
+                      <div className="w-[8rem] min-w-[7rem]">
+                        <img
+                          src={courseImg}
+                          alt="course_name"
+                          className="w-full"
+                        />
+                      </div>
                       <div>
                         <p className="text-base font-semibold">
                           Course name. The highest

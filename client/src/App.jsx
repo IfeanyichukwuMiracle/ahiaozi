@@ -1,4 +1,14 @@
-import { Landing, Signup, Login, Home, Course, Error, Cart } from "./pages";
+import {
+  Landing,
+  Signup,
+  Login,
+  Home,
+  Course,
+  Error,
+  Cart,
+  MyCourses,
+  Learn,
+} from "./pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -11,6 +21,8 @@ function App() {
         <Route path="/auth/signup" element={<Signup />} />
         <Route path="/course/:courseId" element={<Course />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/my-courses" element={<MyCourses />} />
+        <Route path="/course/learn/:courseId" element={<Learn />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
