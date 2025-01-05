@@ -7,5 +7,17 @@ import Error from "./Error/Error";
 import Cart from "./Cart/Cart";
 import MyCourses from "./MyCourses/MyCourses";
 import Learn from "./Learn/Learn";
+import Checkout from "./Checkout/Checkout";
 
-export { Home, Course, Landing, Signup, Login, Error, Cart, MyCourses, Learn };
+export {
+  Home,
+  Course,
+  Landing,
+  Signup,
+  Login,
+  Error,
+  Cart,
+  MyCourses,
+  Learn,
+  Checkout,
+};

@@ -19,7 +19,7 @@ const Course = () => {
         <div>
           <p className="font-extrabold text-lg">Course Name 2.0</p>
           <div className="flex gap-6">
-            <p className="bg-gray-400 rounded-sm text-[.81rem] font-semibold flex justify-center items-center px-1">
+            <p className="bg-amber-200 text-amber-900 shadow-md rounded-sm text-[.81rem] font-semibold flex justify-center items-center px-1">
               Bestseller
             </p>
             <p className="text-sm">
@@ -50,12 +50,13 @@ const Course = () => {
             <p className="text-2xl font-bold mb-4">Course Name 2.0</p>
             <p className="text-base sm:text-[1.08rem] mb-4">
               Course aim Lorem ipsum dolor sit amet consectetur adipisicing.
-              Course aim Lorem ipsum dolor sit amet consectetur adipisicing.
-              Course aim Lorem ipsum dolor sit amet consectetur adipisicing.
-              Course aim Lorem ipsum dolor sit amet consectetur adipisicing.
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Veritatis officia voluptatum repudiandae ullam blanditiis in eaque
+              dolore eligendi laudantium unde optio dolores doloremque, porro
+              asperiores ut. Ad rem atque odio.
             </p>
             <div className="flex gap-6 mb-2">
-              <p className="bg-gray-200 text-gray-500 rounded-sm text-[.81rem] font-semibold flex justify-center items-center px-1">
+              <p className="bg-amber-200 text-amber-900 rounded-sm shadow-md text-[.81rem] font-semibold flex justify-center items-center px-1">
                 Bestseller
               </p>
               <p className="text-sm">
@@ -73,7 +74,7 @@ const Course = () => {
               className="relative h-max cursor-pointer"
               onClick={handleViewPreview}
             >
-              <div className="bg-opacity-10 w-full h-[100%] absolute top-0 flex justify-center items-center text-[whitesmoke] font-bold text-xl bg-gray-800">
+              <div className="bg-opacity-40 w-full h-[100%] absolute top-0 flex justify-center items-center text-white font-bold text-xl bg-gray-800">
                 Preview Course
               </div>
               <img src={courseImg} alt="course name" className="block w-full" />

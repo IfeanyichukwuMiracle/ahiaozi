@@ -15,10 +15,10 @@ const Home = () => {
           className="max-w-[25rem] w-[40%] min-w-[11rem] shadow-xl top-[20%] left-[3%]  sm:top-[25%] sm:left-[5%] p-4 absolute bg-[#fefefe] rounded-md"
         >
           <p
-            className="font-extrabold mb-1 text-xl sm:text-[1.9rem]"
+            className="font-extrabold mb-1 text-xl sm:text-[1.5rem]"
             style={{ fontFamily: "var(--heading-font)" }}
           >
-            Relevant Skills At Your Fingertips
+            Learn to Earn !!
           </p>
           <p className="text-[.93rem] mb-2">
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -40,7 +40,7 @@ const Home = () => {
           className="font-extrabold mb-1 text-2xl"
           style={{ fontFamily: "var(--heading-font)" }}
         >
-          Relevant Skills At Your Fingertips
+          Learn to Earn !!
         </p>
         <p className="text-[.93rem] mb-2">
           Lorem ipsum dolor sit amet consectetur adipisicing elit.

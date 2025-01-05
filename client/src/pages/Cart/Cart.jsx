@@ -1,5 +1,6 @@
 import { Card, Footer, Header } from "../../components";
 import courseImg from "../../assets/course.jpg";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   return (
@@ -37,7 +38,7 @@ const Cart = () => {
                         </p>
                         <p className="text-xs">tutor name</p>
                         <div className="flex items-center gap-2 mt-1">
-                          <p className="bg-amber-300 text-amber-700 rounded-sm py-[.1rem] px-[.2rem] shadow-md text-sm">
+                          <p className="bg-amber-200 text-amber-900 font-semibold rounded-sm py-[.1rem] px-[.2rem] shadow-md text-sm">
                             Latest
                           </p>
                           <p className="text-sm">
@@ -61,10 +62,12 @@ const Cart = () => {
           </div>
           <div className="sm:sticky sm:top-[5.5rem] w-[100%] sm:w-[30%] border-b border-gray-200">
             <p className="font-semibold text-gray-800">Total:</p>
-            <p className="text-2xl font-bold">&#8358;90,000</p>
-            <button className="bg-blue-600 text-white w-[100%] font-bold my-4 py-2 rounded-sm">
-              Checkout
-            </button>
+            <p className="text-2xl sm:text-3xl font-extrabold">&#8358;90,000</p>
+            <Link to={`/checkout`}>
+              <button className="bg-blue-600 hover:bg-blue-500 transition-all text-white w-[100%] font-bold my-4 py-2 rounded-sm">
+                Checkout
+              </button>
+            </Link>
           </div>
         </div>
 

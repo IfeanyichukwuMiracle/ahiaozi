@@ -8,6 +8,7 @@ import {
   Cart,
   MyCourses,
   Learn,
+  Checkout,
 } from "./pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/course/:courseId" element={<Course />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/my-courses" element={<MyCourses />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/course/learn/:courseId" element={<Learn />} />
         <Route path="*" element={<Error />} />
       </Routes>

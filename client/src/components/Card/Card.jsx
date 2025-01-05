@@ -12,7 +12,7 @@ const Card = () => {
             <strong>2,000</strong> enrolled
           </div>
           <p className="font-bold text-lg sm:text-xl">&#8358;99,950</p>
-          <p className="text-[.93rem] bg-gray-300 w-max text-white rounded-sm py-[.1rem] px-1">
+          <p className="text-[.93rem] bg-amber-200 w-max text-amber-900 font-semibold shadow-md rounded-sm py-[.1rem] px-1">
             Bestseller
           </p>
         </div>
