@@ -8,6 +8,7 @@ import Cart from "./Cart/Cart";
 import MyCourses from "./MyCourses/MyCourses";
 import Learn from "./Learn/Learn";
 import Checkout from "./Checkout/Checkout";
+import Dashboard from "./Dashboard/Dashboard";
 
 export {
   Home,
@@ -20,4 +21,5 @@ export {
   MyCourses,
   Learn,
   Checkout,
+  Dashboard,
 };
