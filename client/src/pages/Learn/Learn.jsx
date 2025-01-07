@@ -11,7 +11,7 @@ const Learn = () => {
         <p className="hidden group-hover:block z-20 text-white p-2 sm:px-6 absolute top-0">
           Course name - module name
         </p>
-        <div className="w-full items-center z-10 absolute hidden group-hover:flex top-0 bg-opacity-30 p-2 sm:px-6 bg-gray-900 text-white h-[87%]">
+        <div className="w-full items-center z-10 absolute hidden sm:group-hover:flex top-0 bg-opacity-30 p-2 sm:px-6 bg-gray-900 text-white h-[87%]">
           <div className="w-full flex justify-between">
             <button>prev</button>
             <button>next</button>
