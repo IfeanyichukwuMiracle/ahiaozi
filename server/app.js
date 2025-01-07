@@ -22,9 +22,7 @@ app.use("/api/v1/course", courseRoutes);
 
 // error handling middleware
 app.use((err, req, res, next) => {
-  return res
-    .status(err.code)
-    .json({ status: err.status, message: err.message });
+  return res.status(err.code).json({ status: err.type, message: err.message });
 });
 
 async function startServer(uri) {

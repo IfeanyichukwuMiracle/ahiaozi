@@ -1,6 +1,7 @@
 const Order = require("../models/orderModel");
 const AppError = require("../utils/AppError");
 
+// only logged in users can access this routes
 const placeOrder = async (req, res, next) => {
   try {
   } catch (e) {
