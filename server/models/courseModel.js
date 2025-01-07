@@ -34,6 +34,10 @@ const courseSchema = new mongoose.Schema(
       type: String,
       required: [true, "language is required"],
     },
+    commission: {
+      type: Number,
+      default: 0,
+    },
     moduleContent: [
       {
         moduleName: String,
