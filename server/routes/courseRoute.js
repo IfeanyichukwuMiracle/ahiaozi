@@ -1,9 +1,7 @@
 const router = require("express").Router();
+const { getAllCourses } = require("../controllers/courseController");
 
-// to get all courses
-router.get("/");
-
-// to get a single course
-router.post("/:courseId");
+// get all courses
+router.get("/", getAllCourses);
 
 module.exports = router;

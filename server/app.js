@@ -3,21 +3,28 @@ const app = express();
 const mongoose = require("mongoose");
 const port = process.env.PORT || 5000;
 const cors = require("cors");
+require("dotenv").config();
+
+// routes
+const userRoutes = require("./routes/userRoute");
+const courseRoutes = require("./routes/courseRoute");
+
 // start server
-startServer(`mongodb://127.0.0.1/rtk`);
+startServer(process.env.MONGO_URI);
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.get("/", (req, res, next) => {
-  return res.status(200).json({ status: "success" });
-});
+// route middleware
+app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/course", courseRoutes);
 
+// error handling middleware
 app.use((err, req, res, next) => {
   return res
-    .status(500)
-    .json({ status: "Server Error", message: "Oops! An error occurred." });
+    .status(err.code)
+    .json({ status: err.status, message: err.message });
 });
 
 async function startServer(uri) {
@@ -25,16 +32,6 @@ async function startServer(uri) {
     await mongoose.connect(uri);
     console.log(`Db connected`);
     app.listen(port, () => console.log(`Server started on port ${port}`));
-
-    // const connection = mongoose.connection;
-    // connection.on("connection", () => {
-    //   console.log(`DB Connected!`);
-    //   app.listen(port, () => console.log(`Server started on port ${port}`));
-    // });
-    // connection.on("error", () => {
-    //   console.log(`Server error occured`);
-    //   process.exit();
-    // });
   } catch (e) {
     console.log(e);
     return;
