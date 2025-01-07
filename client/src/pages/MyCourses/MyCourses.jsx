@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Card, Footer, Header } from "../../components";
 
 const MyCourses = () => {
@@ -24,7 +25,11 @@ const MyCourses = () => {
       {/* courses */}
       <section className="px-2 sm:px-6 my-6 grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-6">
         {[1, 2, 3].map((course) => {
-          return <Card key={course} />;
+          return (
+            <Link to={`/course/learn/${course}`} key={course}>
+              <Card />
+            </Link>
+          );
         })}
       </section>
 

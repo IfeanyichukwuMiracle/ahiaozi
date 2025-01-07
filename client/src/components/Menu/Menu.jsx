@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Menu = ({ setShowMenu, showMenu }) => {
   return (
     <>
@@ -23,15 +25,28 @@ const Menu = ({ setShowMenu, showMenu }) => {
         </svg>
 
         <div className="flex flex-col mt-7 gap-2">
-          <nav>Link</nav>
-          <nav>Link</nav>
-          <nav>Link</nav>
-          <nav>Link</nav>
+          <Link to={`/`}>
+            <nav>Home</nav>
+          </Link>
+          <Link to={`/dashboard`}>
+            <nav>Dashboard</nav>
+          </Link>
+          <Link to={`/cart`}>
+            <nav>Cart</nav>
+          </Link>
+          <Link to={`/my-courses`}>
+            <nav>My Courses</nav>
+          </Link>
+          <Link to={`/checkout`}>
+            <nav>Checkout</nav>
+          </Link>
         </div>
         <div>
-          <button className="bg-blue-600 hover:bg-blue-500 transition-all text-white font-semibold w-full py-1 rounded-sm">
-            Button
-          </button>
+          <Link to={`/signup`}>
+            <button className="bg-blue-600 hover:bg-blue-500 transition-all text-white font-semibold w-full py-1 rounded-sm">
+              Signup
+            </button>
+          </Link>
         </div>
       </section>
     </>

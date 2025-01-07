@@ -1,8 +1,12 @@
+import { Link } from "react-router-dom";
+
 const Sidebar = () => {
   return (
     <section className="hidden sm:flex flex-col justify-between h-screen sticky min-w-[14rem] max-w-[15rem] p-5 bg-[#fefefe] border-r border-gray-200 top-0 left-0">
       <div>
-        <p className="font-bold text-lg mb-6 text-blue-600">Infomart</p>
+        <Link to={`/`}>
+          <p className="font-bold text-lg mb-6 text-blue-600">Infomart</p>
+        </Link>
         <div className="flex flex-col gap-4">
           <nav>Overview</nav>
           <nav>Courses</nav>
