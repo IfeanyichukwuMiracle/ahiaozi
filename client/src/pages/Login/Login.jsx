@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Footer } from "../../components";
+import { Link } from "react-router-dom";
 
 import googleIcon from "../../assets/google.png";
 
@@ -69,6 +70,12 @@ const Login = () => {
             >
               Sign in
             </button>
+            <p className="mt-1 text-sm text-center">
+              Don&apos;t have an account?{" "}
+              <Link to={`/auth/signup`} className="text-blue-600 underline">
+                Signup
+              </Link>
+            </p>
           </div>
           {/* Google auth */}
           <p className="text-center py-1 font-semibold my-2">OR</p>

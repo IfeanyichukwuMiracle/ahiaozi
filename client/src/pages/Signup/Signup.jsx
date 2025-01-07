@@ -1,4 +1,5 @@
 import { Footer } from "../../components";
+import { Link } from "react-router-dom";
 
 import googleIcon from "../../assets/google.png";
 import { useState } from "react";
@@ -134,6 +135,12 @@ const Signup = () => {
             >
               Sign up
             </button>
+            <p className="mt-1 text-sm text-center">
+              Already have an account?{" "}
+              <Link to={`/auth/login`} className="text-blue-600 underline">
+                Login
+              </Link>
+            </p>
           </div>
           {/* Google auth */}
           <p className="text-center py-1 font-semibold my-2">OR</p>

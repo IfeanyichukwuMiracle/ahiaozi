@@ -42,7 +42,7 @@ const Menu = ({ setShowMenu, showMenu }) => {
           </Link>
         </div>
         <div>
-          <Link to={`/signup`}>
+          <Link to={`/auth/signup`}>
             <button className="bg-blue-600 hover:bg-blue-500 transition-all text-white font-semibold w-full py-1 rounded-sm">
               Signup
             </button>
