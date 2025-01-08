@@ -8,7 +8,9 @@ const Sidebar = () => {
           <p className="font-bold text-lg mb-8 text-blue-600">Infomart</p>
         </Link>
         <div className="flex flex-col gap-6">
-          <nav>Overview</nav>
+          <Link to={`/dashboard`}>
+            <nav className="text-black">Overview</nav>
+          </Link>
           <nav>Courses</nav>
           <nav>Marketplace</nav>
           <nav>Add Course</nav>

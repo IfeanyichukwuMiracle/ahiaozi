@@ -73,7 +73,7 @@ const Home = () => {
               size={60}
               thickness={120}
               speed={100}
-              color="blue"
+              color="#3581fc"
               secondaryColor="#ebebeb"
             />
           </div>
