@@ -1,14 +1,32 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cart from "../Cart/Cart";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Menu from "../Menu/Menu";
+import { Context } from "../../context/AppContext";
+import toast, { Toaster } from "react-hot-toast";
 
 const Header = ({ sticky }) => {
   const [showCart, setShowCart] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const { state, dispatch } = useContext(Context);
+  const navigate = useNavigate();
+
+  async function logout() {
+    const toastId = toast.loading("Logging out...");
+    await new Promise((resolve) => setTimeout(resolve, 1800));
+    dispatch({ type: "logout" });
+    toast.dismiss(toastId);
+    toast.success("Logged out!");
+    setTimeout(() => navigate("/"), 1500);
+  }
+
+  async function becomeAffiliate() {}
+
+  async function becomeTutor() {}
 
   return (
     <>
+      <Toaster />
       {/* popup cart */}
       {showCart && <Cart setShowCart={setShowCart} />}
       {/* popup menu */}
@@ -23,20 +41,38 @@ const Header = ({ sticky }) => {
         <Link to={"/"} className="text-black">
           <p className="font-bold text-lg">Infomart</p>
         </Link>
-        <div className="sm:flex sm:gap-4 hidden">
-          <nav>My Learning</nav>
-          <nav>Affiliates</nav>
-          <nav>Tutors</nav>
-          <nav>
-            <Link to={`/auth/signup`} style={{ color: "black" }}>
-              Sign up
+        <div className="sm:flex sm:gap-4 hidden text-[.95rem]">
+          {state.token && (
+            <Link to={`/my-courses`}>
+              <nav>My Courses</nav>
             </Link>
-          </nav>
+          )}
+          {state.role === "tutor" || state.role === "affiliate" ? (
+            <Link to={`/dashboard`}>
+              <nav>Dashboard</nav>
+            </Link>
+          ) : (
+            <>
+              <nav className="cursor-pointer" onClick={becomeAffiliate}>
+                Become an Affiliate
+              </nav>
+              <nav className="cursor-pointer" onClick={becomeTutor}>
+                Become a Tutor
+              </nav>
+            </>
+          )}
+          {!state.token && (
+            <nav>
+              <Link to={`/auth/signup`} style={{ color: "black" }}>
+                Sign up
+              </Link>
+            </nav>
+          )}
         </div>
         <div className="flex items-center gap-4">
           <div className="relative" onClick={() => setShowCart(true)}>
-            <p className="absolute -top-3 -right-2 text-sm bg-red-400 w-5 h-5 flex items-center justify-center rounded-full font-semibold text-white">
-              {3}
+            <p className="absolute -top-3 -right-2 text-sm bg-red-500 w-5 h-5 flex items-center justify-center rounded-full font-semibold text-white">
+              {state.cart.length}
             </p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -53,11 +89,20 @@ const Header = ({ sticky }) => {
               />
             </svg>
           </div>
-          <Link to={`/auth/signup`}>
-            <button className="hidden sm:block border-[1.95px] py-1 px-2 text-blue-500 hover:bg-blue-50 transition-all border-blue-500 rounded-md">
-              Sign up
+          {state.token ? (
+            <button
+              onClick={logout}
+              className="hidden sm:block bg-red-500 hover:bg-red-400 text-white text-base font-semibold px-2 pb-1 transition-all rounded-sm"
+            >
+              Logout
             </button>
-          </Link>
+          ) : (
+            <Link to={`/auth/signup`}>
+              <button className="hidden sm:block border-[1.95px] pb-1 px-2 text-blue-500 hover:bg-blue-50 transition-all border-blue-500 rounded-md">
+                Sign up
+              </button>
+            </Link>
+          )}
         </div>
         <svg
           xmlns="http://www.w3.org/2000/svg"

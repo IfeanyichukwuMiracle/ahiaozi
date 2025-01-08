@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Footer } from "../../components";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 import googleIcon from "../../assets/google.png";
+import axios from "axios";
+// url
+import backend_url from "../../backend-url";
+import { Context } from "../../context/AppContext";
 
 const Login = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
+  const { dispatch } = useContext(Context);
 
   function handleChange(e) {
     setUser((prevData) => {
@@ -16,22 +22,34 @@ const Login = () => {
     });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const values = Object.values(user);
     if (values.includes("")) {
-      alert("Fill empty fields!");
+      toast.error("Fields can't be empty!");
       return;
     }
 
-    console.log(user);
-    setUser({
-      email: "",
-      password: "",
-    });
+    const toastId = toast.loading("Logging in...");
+    try {
+      const response = await axios.post(`${backend_url}/user/login`, user);
+      dispatch({ type: "set_token", payload: response.data.token });
+      dispatch({ type: "set_role", payload: response.data.role });
+      toast.success("Login success!");
+      setTimeout(() => navigate("/"), 1800);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      toast.dismiss(toastId);
+      setUser({
+        email: "",
+        password: "",
+      });
+    }
   }
   return (
     <>
+      <Toaster />
       <section className="w-full py-16 flex justify-center items-center">
         <form
           className="bg-[#fefefe] shadow-md w-max rounded-md p-6"

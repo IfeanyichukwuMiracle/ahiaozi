@@ -39,6 +39,8 @@ const userSchema = new mongoose.Schema(
     totalEarnings: Number,
     affiliateCode: String,
     totalCommission: Number,
+    accountNumber: Number,
+    bankName: String,
   },
   { timestamps: true }
 );

@@ -1,8 +1,11 @@
 import { Footer } from "../../components";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 import googleIcon from "../../assets/google.png";
 import { useState } from "react";
+import axios from "axios";
+// url
+import backend_url from "../../backend-url";
 
 const Signup = () => {
   const [user, setUser] = useState({
@@ -13,6 +16,7 @@ const Signup = () => {
     confirm_password: "",
     agreed: true,
   });
+  const navigate = useNavigate();
 
   function handleChange(e) {
     setUser((prevData) => {
@@ -20,32 +24,46 @@ const Signup = () => {
     });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const values = Object.values(user);
     const { agreed, ...rest } = user;
-
     if (!agreed) {
-      alert("Agree to terms");
+      toast.error("Agree to terms and conditions");
       return;
     }
     if (values.includes("")) {
-      alert("Fill empty fields!");
+      toast.error("Fields can't be empty");
+      return;
+    }
+    if (user.password !== user.confirm_password) {
+      toast.error("Passwords don't match!");
       return;
     }
 
-    console.log(rest);
-    setUser({
-      firstname: "",
-      lastname: "",
-      email: "",
-      password: "",
-      confirm_password: "",
-      agreed: true,
-    });
+    const toastId = toast.loading("Signing up...");
+    try {
+      await axios.post(`${backend_url}/user/signup`, rest);
+      toast.success("Signup successfull!");
+      setTimeout(() => navigate("/auth/login"), 1800);
+    } catch (e) {
+      console.log(e);
+      toast.error("Signup error!");
+    } finally {
+      toast.dismiss(toastId);
+      setUser({
+        firstname: "",
+        lastname: "",
+        email: "",
+        password: "",
+        confirm_password: "",
+        agreed: true,
+      });
+    }
   }
   return (
     <>
+      <Toaster />
       <section className="w-full py-16 flex justify-center items-center">
         <form
           className="bg-[#fefefe] shadow-md w-max rounded-md p-6"

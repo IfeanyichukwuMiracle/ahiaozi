@@ -38,7 +38,7 @@ const login = async (req, res, next) => {
       expiresIn: "2d",
     });
     // send response
-    return res.status(200).json({ status: "success", token });
+    return res.status(200).json({ status: "success", token, role: user.role });
   } catch (e) {
     console.log(e);
     return next(new AppError(e.message, 500, "Login Error!"));

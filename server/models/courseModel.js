@@ -11,7 +11,7 @@ const courseSchema = new mongoose.Schema(
       default: 0,
     },
     price: {
-      type: String,
+      type: Number,
       required: [true, "price is required"],
     },
     tutor: {
@@ -37,6 +37,7 @@ const courseSchema = new mongoose.Schema(
     commission: {
       type: Number,
       default: 0,
+      select: false,
     },
     moduleContent: [
       {

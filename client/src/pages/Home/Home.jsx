@@ -1,9 +1,16 @@
 import { Header, Card, Footer } from "../../components";
-
+import { SpinnerCircular } from "spinners-react";
 import heroImg from "../../assets/home-img.jpg";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getCourses } from "../../queryFns.js";
 
 const Home = () => {
+  const result = useQuery({
+    queryKey: ["courses"],
+    queryFn: getCourses,
+  });
+
   return (
     <>
       <Header sticky={true} />
@@ -55,25 +62,36 @@ const Home = () => {
         <p className="font-extrabold text-xl sm:text-2xl mb-4 sm:mb-6">
           Recommended For You
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:grid-cols-4">
-          {[1, 2, 3, 4, 5].map((item) => {
-            return (
-              <Link key={item} to={`/course/${item}`}>
-                <Card />
-              </Link>
-            );
-          })}
-        </div>
-      </section>
-      <section className="mt-16 px-2 sm:px-6">
-        <p className="font-extrabold text-xl sm:text-2xl mb-4 sm:mb-6">
-          Trending
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:grid-cols-4">
-          {[1, 2, 3, 4, 5].map((item) => {
-            return <Card key={item} />;
-          })}
-        </div>
+        {result.isError ? (
+          <section className="border border-red-500 text-red-500 bg-red-50 rounded-sm p-4 my-12">
+            <p>An Error Occurred while fetching data: Network Error</p>
+            <p>Check internet connection and try again</p>
+          </section>
+        ) : result.isLoading ? (
+          <div className="w-full py-4 my-8 flex items-center justify-center">
+            <SpinnerCircular
+              size={60}
+              thickness={120}
+              speed={100}
+              color="blue"
+              secondaryColor="#ebebeb"
+            />
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:grid-cols-4">
+            {result?.data?.data?.data?.length > 0 ? (
+              result?.data.data.data.map((course) => {
+                return (
+                  <Link key={course._id} to={`/course/${course._id}`}>
+                    <Card {...course} />
+                  </Link>
+                );
+              })
+            ) : (
+              <p className="py-4 my-4">No courses!</p>
+            )}
+          </div>
+        )}
       </section>
 
       {/* Footer */}

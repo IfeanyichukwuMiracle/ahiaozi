@@ -38,7 +38,7 @@ const getAllCourses = async (req, res, next) => {
         : (query = query);
     }
 
-    const courses = await query.select("-moduleContent");
+    const courses = await query.select("-moduleContent").populate("tutor");
     // send response
     return res
       .status(200)
@@ -49,4 +49,43 @@ const getAllCourses = async (req, res, next) => {
   }
 };
 
-module.exports = { getAllCourses };
+// get a course
+const getCourse = async (req, res, next) => {
+  try {
+    const course = await Course.findById(req.params.courseId)
+      .select("-moduleContent")
+      .populate("tutor");
+    if (!course) return next(new AppError("Course not found", 404, "error"));
+
+    return res.status(200).json({ status: "success", data: course });
+  } catch (e) {
+    console.log(e);
+    return next(new AppError(e.message, 500, "Course Fetch Error!"));
+  }
+};
+
+// add courses
+const addCourse = async (req, res, next) => {
+  try {
+    const course = await Course.create({ ...req.body, tutor: req.user._id });
+
+    // send response
+    return res.status(200).json({ status: "success", data: course });
+  } catch (e) {
+    console.log(e);
+    return next(new AppError(e.message, 500, "Course Upload Error"));
+  }
+};
+
+// update course
+const updateCourse = async (req, res, next) => {
+  try {
+    const course = await Course.findById(req.params.courseId);
+    if (!course) return next(new AppError("Course not found!", 404, "Error"));
+  } catch (e) {
+    console.log(e);
+    return next(new AppError(e.message, 500, "Course Update Error"));
+  }
+};
+
+module.exports = { getAllCourses, addCourse, updateCourse, getCourse };

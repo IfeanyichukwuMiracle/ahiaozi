@@ -25,39 +25,21 @@ const authenticate = async (req, res, next) => {
 };
 
 const authorizeTutor = async (req, res, next) => {
-  try {
-    if (req.user.role !== "tutor") {
-      return next(
-        new AppError(
-          "You are not authorized to access this route",
-          400,
-          "error"
-        )
-      );
-    }
-    next();
-  } catch (e) {
-    console.log(e);
-    return next(new AppError(e.message, 500, "Authorization Error!"));
+  if (req.user.role !== "tutor") {
+    return next(
+      new AppError("You are not authorized to access this route", 400, "error")
+    );
   }
+  next();
 };
 
 const authorizeAffiliate = async (req, res, next) => {
-  try {
-    if (req.user.role !== "affiliate") {
-      return next(
-        new AppError(
-          "You are not authorized to access this route",
-          400,
-          "error"
-        )
-      );
-    }
-    next();
-  } catch (e) {
-    console.log(e);
-    return next(new AppError(e.message, 500, "Authorization Error!"));
+  if (req.user.role !== "affiliate") {
+    return next(
+      new AppError("You are not authorized to access this route", 400, "error")
+    );
   }
+  next();
 };
 
 module.exports = { authenticate, authorizeAffiliate, authorizeTutor };

@@ -1,8 +1,28 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Context } from "../../context/AppContext";
+import toast, { Toaster } from "react-hot-toast";
 
 const Menu = ({ setShowMenu, showMenu }) => {
+  const { state, dispatch } = useContext(Context);
+  const navigate = useNavigate();
+
+  async function logout() {
+    setShowMenu(false);
+    const toastId = toast.loading("Logging out...");
+    await new Promise((resolve) => setTimeout(resolve, 1800));
+    dispatch({ type: "logout" });
+    toast.dismiss(toastId);
+    toast.success("Logged out!");
+    setTimeout(() => navigate("/"), 1500);
+  }
+
+  async function becomeAffiliate() {}
+  async function becomeTutor() {}
+
   return (
     <>
+      <Toaster />
       <section
         className={`flex flex-col max-w-[17rem] fixed top-0 ${
           showMenu ? `right-0` : `-right-[18rem]`
@@ -24,29 +44,48 @@ const Menu = ({ setShowMenu, showMenu }) => {
           />
         </svg>
 
-        <div className="flex flex-col mt-7 gap-2">
+        <div className="flex flex-col mt-7 gap-6 text-lg">
           <Link to={`/`}>
             <nav>Home</nav>
           </Link>
-          <Link to={`/dashboard`}>
-            <nav>Dashboard</nav>
-          </Link>
+          {state.role === "tutor" || state.role === "affiliate" ? (
+            <Link to={`/dashboard`}>
+              <nav>Dashboard</nav>
+            </Link>
+          ) : (
+            <>
+              <nav className="cursor-pointer" onClick={becomeAffiliate}>
+                Become an Affiliate
+              </nav>
+              <nav className="cursor-pointer" onClick={becomeTutor}>
+                Become a Tutor
+              </nav>
+            </>
+          )}
           <Link to={`/cart`}>
             <nav>Cart</nav>
           </Link>
-          <Link to={`/my-courses`}>
-            <nav>My Courses</nav>
-          </Link>
-          <Link to={`/checkout`}>
-            <nav>Checkout</nav>
-          </Link>
+          {state.token && (
+            <Link to={`/my-courses`}>
+              <nav>My Courses</nav>
+            </Link>
+          )}
         </div>
         <div>
-          <Link to={`/auth/signup`}>
-            <button className="bg-blue-600 hover:bg-blue-500 transition-all text-white font-semibold w-full py-1 rounded-sm">
-              Signup
+          {!state.token ? (
+            <Link to={`/auth/signup`}>
+              <button className="bg-blue-600 hover:bg-blue-500 transition-all text-white font-semibold w-full py-1 rounded-sm">
+                Signup
+              </button>
+            </Link>
+          ) : (
+            <button
+              onClick={logout}
+              className="bg-red-500 hover:bg-red-400 transition-all text-white font-semibold w-full py-1 rounded-sm"
+            >
+              Logout
             </button>
-          </Link>
+          )}
         </div>
       </section>
     </>
