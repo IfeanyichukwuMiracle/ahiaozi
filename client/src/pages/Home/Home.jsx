@@ -72,9 +72,9 @@ const Home = () => {
             <SpinnerCircular
               size={60}
               thickness={120}
-              speed={100}
+              speed={120}
               color="#3581fc"
-              secondaryColor="#ebebeb"
+              secondaryColor="#fdfdfd"
             />
           </div>
         ) : (

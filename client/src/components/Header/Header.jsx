@@ -48,7 +48,7 @@ const Header = ({ sticky }) => {
             </Link>
           )}
           {state.role === "tutor" || state.role === "affiliate" ? (
-            <Link to={`/dashboard`}>
+            <Link to={`/dashboard/overview`}>
               <nav>Dashboard</nav>
             </Link>
           ) : (

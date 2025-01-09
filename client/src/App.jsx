@@ -16,6 +16,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RouteProtector from "./routeProtector/RouteProtector";
 import DashboardProtector from "./routeProtector/DashboardProtector";
 import CheckoutProtector from "./routeProtector/CheckoutProtector";
+import AuthProtector from "./routeProtector/AuthProtector";
 
 function App() {
   return (
@@ -24,8 +25,22 @@ function App() {
         <Routes>
           <Route path="/landing" element={<Landing />} />
           <Route path="/" element={<Home />} />
-          <Route path="/auth/login" element={<Login />} />
-          <Route path="/auth/signup" element={<Signup />} />
+          <Route
+            path="/auth/login"
+            element={
+              <AuthProtector>
+                <Login />
+              </AuthProtector>
+            }
+          />
+          <Route
+            path="/auth/signup"
+            element={
+              <AuthProtector>
+                <Signup />
+              </AuthProtector>
+            }
+          />
           <Route path="/course/:courseId" element={<Course />} />
           <Route path="/cart" element={<Cart />} />
           <Route
@@ -53,7 +68,7 @@ function App() {
             }
           />
           <Route
-            path="/dashboard"
+            path="/dashboard/:dashboardNav"
             element={
               <DashboardProtector>
                 <Dashboard />
