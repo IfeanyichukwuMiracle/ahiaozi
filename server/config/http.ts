@@ -1,4 +1,4 @@
-export const HttpStatusCodes = {
+export const HttpStatusCodes: any = {
   OK: 200,
   Created: 201,
   NoContent: 204,
