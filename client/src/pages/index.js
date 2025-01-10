@@ -9,6 +9,7 @@ import MyCourses from "./MyCourses/MyCourses";
 import Learn from "./Learn/Learn";
 import Checkout from "./Checkout/Checkout";
 import Dashboard from "./Dashboard/Dashboard";
+import Profile from "./Profile/Profile";
 
 export {
   Home,
@@ -22,4 +23,5 @@ export {
   Learn,
   Checkout,
   Dashboard,
+  Profile,
 };

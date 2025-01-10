@@ -11,6 +11,7 @@ import {
   Learn,
   Checkout,
   Dashboard,
+  Profile,
 } from "./pages";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RouteProtector from "./routeProtector/RouteProtector";
@@ -25,6 +26,14 @@ function App() {
         <Routes>
           <Route path="/landing" element={<Landing />} />
           <Route path="/" element={<Home />} />
+          <Route
+            path="/profile/:userId"
+            element={
+              <RouteProtector>
+                <Profile />
+              </RouteProtector>
+            }
+          />
           <Route
             path="/auth/login"
             element={
