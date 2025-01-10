@@ -33,10 +33,12 @@ const Login = () => {
     const toastId = toast.loading("Logging in...");
     try {
       const response = await axios.post(`${backend_url}/user/login`, user);
-      dispatch({ type: "set_token", payload: response.data.token });
-      dispatch({ type: "set_role", payload: response.data.role });
       toast.success("Login success!");
-      setTimeout(() => navigate("/"), 1800);
+      setTimeout(() => {
+        navigate("/");
+        dispatch({ type: "set_token", payload: response.data.token });
+        dispatch({ type: "set_role", payload: response.data.role });
+      }, 1800);
     } catch (e) {
       console.log(e);
     } finally {

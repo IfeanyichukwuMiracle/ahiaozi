@@ -3,8 +3,40 @@ import { Footer, Header } from "../../components";
 
 const Profile = () => {
   const [profile, setProfile] = useState("personal");
+  const [updatePassword, setUpdatePassword] = useState(false);
+
   return (
     <>
+      {updatePassword && (
+        <UpdatePassword setUpdatePassword={setUpdatePassword} />
+      )}
+
+      {/* password update */}
+      <section
+        onClick={() => setUpdatePassword(true)}
+        className={`fixed bottom-[1rem] p-2 group hover:bg-blue-600 transition-all rounded-full shadow-xl cursor-pointer flex items-center justify-center right-[1rem] bg-blue-500 text-white`}
+      >
+        <div className="flex items-center gap-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="size-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z"
+            />
+          </svg>
+          <p className="hidden group-hover:block font-semibold">
+            Update Password
+          </p>
+        </div>
+      </section>
+
       {/* Header */}
       <Header />
 
@@ -135,5 +167,74 @@ const Profile = () => {
     </>
   );
 };
+
+function UpdatePassword({ setUpdatePassword }) {
+  const [isPwd, setIsPwd] = useState(false);
+
+  function submitPassword(e) {
+    e.preventDefault();
+    if (!isPwd) {
+      setIsPwd(true);
+      return;
+    }
+    alert("New Password submitted");
+    setUpdatePassword(false);
+  }
+
+  return (
+    <>
+      <section className="fixed flex p-2 sm:p-6 items-center justify-center z-[100] top-0 w-full bg-gray-900 bg-opacity-50 h-screen">
+        <div className="bg-[#fefefe] p-4 rounded-md w-full sm:w-[50%] sm:min-w-[20rem] shadow-md relative">
+          <svg
+            onClick={() => setUpdatePassword(false)}
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="size-6 absolute -top-7 text-white right-0 sm:-right-6 cursor-pointer"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
+          <p className="text-lg font-semibold mb-3">Password Update</p>
+          <form>
+            <div className={`${isPwd && "mb-2"}`}>
+              <input
+                type="password"
+                name="current_password"
+                id="password"
+                placeholder="Current Password"
+                className="bg-gray-100 w-full p-2 rounded-md"
+                disabled={isPwd}
+              />
+            </div>
+            {isPwd && (
+              <div className="mb-2">
+                <input
+                  type="password"
+                  name="new_password"
+                  id="password"
+                  placeholder="New Password"
+                  className="bg-gray-100 w-full p-2 rounded-md"
+                />
+              </div>
+            )}
+            <button
+              onClick={submitPassword}
+              type="submit"
+              className="w-full bg-blue-500 hover:bg-blue-400 transition-all text-white font-semibold py-2 rounded-md mt-4"
+            >
+              {isPwd ? "Update Password" : "Verify Password"}
+            </button>
+          </form>
+        </div>
+      </section>
+    </>
+  );
+}
 
 export default Profile;

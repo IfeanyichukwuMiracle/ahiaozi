@@ -1,11 +1,10 @@
 import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Context } from "../../context/AppContext";
 import toast, { Toaster } from "react-hot-toast";
 
 const Menu = ({ setShowMenu, showMenu }) => {
   const { state, dispatch } = useContext(Context);
-  const navigate = useNavigate();
 
   async function logout() {
     setShowMenu(false);
@@ -14,7 +13,6 @@ const Menu = ({ setShowMenu, showMenu }) => {
     dispatch({ type: "logout" });
     toast.dismiss(toastId);
     toast.success("Logged out!");
-    setTimeout(() => navigate("/"), 1500);
   }
 
   async function becomeAffiliate() {}

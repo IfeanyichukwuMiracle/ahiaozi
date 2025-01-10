@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Cart from "../Cart/Cart";
 import { useContext, useState } from "react";
 import Menu from "../Menu/Menu";
@@ -9,7 +9,6 @@ const Header = ({ sticky }) => {
   const [showCart, setShowCart] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const { state, dispatch } = useContext(Context);
-  const navigate = useNavigate();
 
   async function logout() {
     const toastId = toast.loading("Logging out...");
@@ -17,7 +16,6 @@ const Header = ({ sticky }) => {
     dispatch({ type: "logout" });
     toast.dismiss(toastId);
     toast.success("Logged out!");
-    setTimeout(() => navigate("/"), 1500);
   }
 
   async function becomeAffiliate() {}
