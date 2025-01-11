@@ -91,13 +91,13 @@ const Course = () => {
           </section>
         ) : result.isLoading ? (
           // spinner component
-          <div className="w-full py-8 my-12 flex items-center justify-center">
+          <div className="w-full py-8 my-16 flex items-center justify-center">
             <SpinnerCircular
               size={60}
               thickness={120}
               speed={100}
-              color="blue"
-              secondaryColor="#ebebeb"
+              color="#3581fc"
+              secondaryColor="#fefefe"
             />
           </div>
         ) : (

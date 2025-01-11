@@ -101,13 +101,13 @@ const Home = () => {
             <p>Check internet connection and try again</p>
           </section>
         ) : result.isLoading ? (
-          <div className="w-full py-4 my-8 flex items-center justify-center">
+          <div className="w-full py-4 my-16 flex items-center justify-center">
             <SpinnerCircular
               size={60}
               thickness={120}
               speed={120}
               color="#3581fc"
-              secondaryColor="#fdfdfd"
+              secondaryColor="#fefefe"
             />
           </div>
         ) : (
