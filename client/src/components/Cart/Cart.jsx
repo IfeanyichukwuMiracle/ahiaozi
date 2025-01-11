@@ -24,7 +24,7 @@ const Cart = ({ setShowCart }) => {
   }, [state]);
   return (
     <>
-      <section className="fixed top-0 z-[60] bg-black bg-opacity-70 w-full min-h-screen flex items-center justify-center">
+      <section className="fixed top-0 z-[60] bg-gray-900 bg-opacity-50 w-full min-h-screen flex items-center justify-center">
         <div className="bg-white rounded-sm w-full h-screen sm:h-[35rem] p-6 sm:w-[70%] md:w-[55%] relative">
           {state.cart.length > 0 ? (
             <>

@@ -1,6 +1,5 @@
 import AppContext from "./context/AppContext";
 import {
-  Landing,
   Signup,
   Login,
   Home,
@@ -24,7 +23,6 @@ function App() {
     <AppContext>
       <BrowserRouter>
         <Routes>
-          <Route path="/landing" element={<Landing />} />
           <Route path="/" element={<Home />} />
           <Route
             path="/profile/:userId"

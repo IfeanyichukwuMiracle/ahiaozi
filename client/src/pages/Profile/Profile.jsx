@@ -42,7 +42,7 @@ const Profile = () => {
 
       {/* Profile section */}
       <section className="py-10 px-2 sm:px-6 my-10 w-full flex flex-col items-center justify-center">
-        <form className="bg-[#fefefe] p-4 rounded-md shadow-md w-full sm:w-[40%] sm:max-w-[25rem] ">
+        <form className="bg-[#fefefe] p-4 rounded-md shadow-md w-[70%] min-w-[21rem] sm:w-[40%] sm:max-w-[25rem] ">
           {profile === "bank" && (
             <>
               <p className="font-bold text-xl mb-3">Bank Details</p>
@@ -184,7 +184,7 @@ function UpdatePassword({ setUpdatePassword }) {
   return (
     <>
       <section className="fixed flex p-2 sm:p-6 items-center justify-center z-[100] top-0 w-full bg-gray-900 bg-opacity-50 h-screen">
-        <div className="bg-[#fefefe] p-4 rounded-md w-full sm:w-[50%] sm:min-w-[20rem] shadow-md relative">
+        <div className="bg-[#fefefe] p-4 rounded-sm w-full sm:w-[50%] sm:min-w-[20rem] shadow-md relative">
           <svg
             onClick={() => setUpdatePassword(false)}
             xmlns="http://www.w3.org/2000/svg"
@@ -208,7 +208,7 @@ function UpdatePassword({ setUpdatePassword }) {
                 name="current_password"
                 id="password"
                 placeholder="Current Password"
-                className="bg-gray-100 w-full p-2 rounded-md"
+                className="bg-gray-100 w-full p-2 rounded-sm"
                 disabled={isPwd}
               />
             </div>
@@ -219,14 +219,14 @@ function UpdatePassword({ setUpdatePassword }) {
                   name="new_password"
                   id="password"
                   placeholder="New Password"
-                  className="bg-gray-100 w-full p-2 rounded-md"
+                  className="bg-gray-100 w-full p-2 rounded-sm"
                 />
               </div>
             )}
             <button
               onClick={submitPassword}
               type="submit"
-              className="w-full bg-blue-500 hover:bg-blue-400 transition-all text-white font-semibold py-2 rounded-md mt-4"
+              className="w-full bg-blue-500 hover:bg-blue-400 transition-all text-white font-semibold py-2 rounded-sm mt-4"
             >
               {isPwd ? "Update Password" : "Verify Password"}
             </button>

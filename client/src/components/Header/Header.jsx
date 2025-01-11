@@ -96,7 +96,7 @@ const Header = ({ sticky }) => {
             </button>
           ) : (
             <Link to={`/auth/signup`}>
-              <button className="hidden sm:block border-[1.95px] pb-1 px-2 text-blue-500 hover:bg-blue-50 transition-all border-blue-500 rounded-md">
+              <button className="hidden sm:block border-[1.95px] pb-1 px-2 text-blue-500 hover:bg-blue-50 transition-all border-blue-500 rounded-sm">
                 Sign up
               </button>
             </Link>

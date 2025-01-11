@@ -10,7 +10,8 @@ const userRoutes = require("./routes/userRoute");
 const courseRoutes = require("./routes/courseRoute");
 
 // start server
-startServer(process.env.MONGO_URI_2);
+// startServer(process.env.MONGO_URI_2);
+startServer(process.env.MONGO_URI);
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));

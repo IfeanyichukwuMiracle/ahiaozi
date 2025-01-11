@@ -87,14 +87,14 @@ const Menu = ({ setShowMenu, showMenu }) => {
         <div>
           {!state.token ? (
             <Link to={`/auth/signup`}>
-              <button className="bg-blue-600 hover:bg-blue-500 transition-all text-white font-semibold w-full py-1 rounded-sm">
+              <button className="bg-blue-600 hover:bg-blue-500 transition-all text-white font-semibold w-full py-2 rounded-sm">
                 Signup
               </button>
             </Link>
           ) : (
             <button
               onClick={logout}
-              className="bg-red-500 hover:bg-red-400 transition-all text-white font-semibold w-full py-1 rounded-sm"
+              className="bg-red-500 hover:bg-red-400 transition-all text-white font-semibold w-full py-2 rounded-sm"
             >
               Logout
             </button>

@@ -4,7 +4,12 @@ const Card = ({ name, tutor, enrolled, price }) => {
   return (
     <>
       <div className="cursor-pointer">
-        <img src={course_img} alt="course_name" className="block rounded-sm" />
+        <img
+          src={course_img}
+          alt="course_name"
+          className="block rounded-sm"
+          loading="lazy"
+        />
         <div>
           <p className="font-bold text-lg">{name || "Course name"}</p>
           <p className="text-[.8rem] text-gray-600">
