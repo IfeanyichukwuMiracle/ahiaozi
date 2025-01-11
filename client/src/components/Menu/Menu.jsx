@@ -73,6 +73,16 @@ const Menu = ({ setShowMenu, showMenu }) => {
               <nav>Marketplace</nav>
             </Link>
           )}
+          {state.role === "tutor" && (
+            <>
+              <Link to={`/dashboard/courses`}>
+                <nav>Courses</nav>
+              </Link>
+              <Link to={`/dashboard/add-course`}>
+                <nav>Add Course</nav>
+              </Link>
+            </>
+          )}
         </div>
         <div>
           {!state.token ? (
