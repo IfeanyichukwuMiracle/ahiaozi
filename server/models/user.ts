@@ -15,9 +15,9 @@ const userSchema = new mongoose.Schema(
       required: [true, "email is required"],
       unique: [true, "email already exists"],
       validate: {
-        validator: (pwd: string) => {
+        validator: (email: string) => {
           const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          return pattern.test(pwd);
+          return pattern.test(email);
         },
         message: "email not valid",
       },
@@ -25,8 +25,6 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, "password is required"],
-      minLength: [8, "password should be longer than 8 characters"],
-      //   select: false,
     },
     role: {
       type: String,
