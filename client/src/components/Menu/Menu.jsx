@@ -47,7 +47,7 @@ const Menu = ({ setShowMenu, showMenu }) => {
             <nav>Home</nav>
           </Link>
           {state.role === "tutor" || state.role === "affiliate" ? (
-            <Link to={`/dashboard`}>
+            <Link to={`/dashboard/overview`}>
               <nav>Dashboard</nav>
             </Link>
           ) : (
@@ -66,6 +66,11 @@ const Menu = ({ setShowMenu, showMenu }) => {
           {state.token && (
             <Link to={`/my-courses`}>
               <nav>My Courses</nav>
+            </Link>
+          )}
+          {state.role === "affiliate" && (
+            <Link to={`/dashboard/marketplace`}>
+              <nav>Marketplace</nav>
             </Link>
           )}
         </div>
