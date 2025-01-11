@@ -14,10 +14,8 @@ interface BodyType {
   lastname: string;
   email: string;
   password: string;
-  cpassword: string;
+  cpassword?: string;
 }
-
-type DataObjType = Omit<BodyType, "cpassword">;
 
 export const signup = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -50,7 +48,7 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const dataObj: DataObjType = {
+    const dataObj: BodyType = {
       firstname: firstname?.toLowerCase(),
       lastname: lastname?.toLowerCase(),
       email: email?.toLowerCase(),
