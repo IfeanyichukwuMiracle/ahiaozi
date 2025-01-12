@@ -3,6 +3,8 @@ import courseImg from "../../assets/course.jpg";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../../context/AppContext";
 
+import { motion } from "motion/react";
+
 const Cart = ({ setShowCart }) => {
   const { state, dispatch } = useContext(Context);
   const [total, setTotal] = useState(0);
@@ -25,7 +27,12 @@ const Cart = ({ setShowCart }) => {
   return (
     <>
       <section className="fixed top-0 z-[60] bg-gray-900 bg-opacity-50 w-full min-h-screen flex items-center justify-center">
-        <div className="bg-white rounded-sm w-full h-screen sm:h-[35rem] p-6 sm:w-[70%] md:w-[55%] relative">
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0, opacity: 0 }}
+          className="bg-white rounded-sm w-full h-screen sm:h-[35rem] p-6 sm:w-[70%] md:w-[55%] relative"
+        >
           {state.cart.length > 0 ? (
             <>
               <div className="mb-10 flex justify-between items-center w-full">
@@ -122,12 +129,14 @@ const Cart = ({ setShowCart }) => {
                   }}
                   to={`/`}
                 >
-                  <p className="text-blue-600 underline">Get Courses.</p>
+                  <p className="text-blue-600 underline cursor-pointer">
+                    Get Courses.
+                  </p>
                 </Link>
               </div>
             </div>
           )}
-        </div>
+        </motion.div>
       </section>
     </>
   );

@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getCourses } from "../../queryFns.js";
 
+import { motion } from "motion/react";
+
 import course_img from "../../assets/course.jpg";
 
 import profile from "../../assets/profile.jpg";
@@ -22,7 +24,7 @@ const Home = () => {
       <Header sticky={true} />
 
       {/* hero section */}
-      <section className="px-2 sm:px-6 py-[4rem] flex items-center flex-col sm:flex-row gap-10">
+      <section className="px-2 sm:px-6 py-7 sm:py-[4rem] flex items-center flex-col sm:flex-row gap-10">
         <div className="sm:w-[60%] w-full">
           <p
             className="font-extrabold text-2xl sm:text-3xl mb-3"
@@ -77,7 +79,7 @@ const Home = () => {
       </section>
 
       {/* categories */}
-      <section className="w-full px-2 py-4 sm:px-6 my-8 sm:my-16 bg-[#fcfcfc] text-sm flex flex-wrap gap-2 justify-center">
+      <section className="w-full px-2 py-4 sm:px-6 my-5 sm:mt-0 sm:mb-14 bg-[#fcfcfc] text-sm flex flex-wrap gap-2 justify-center">
         {[1, 2, 3, 4, 5, 6].map((category) => {
           return (
             <nav
@@ -126,36 +128,42 @@ const Home = () => {
               )}
             </div>
             {result?.data?.data?.data?.length > 0 && (
-              <div className="my-12 flex gap-4">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="size-7 sm:size-8 cursor-pointer"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M15.75 19.5 8.25 12l7.5-7.5"
-                  />
-                </svg>
+              <div className="my-6 w-full justify-between flex items-center">
+                <div className="flex gap-1 items-center text-sm cursor-pointer ">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-6 sm:size-7 cursor-pointer"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15.75 19.5 8.25 12l7.5-7.5"
+                    />
+                  </svg>
+                  <p>Previous</p>
+                </div>
 
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="size-7 sm:size-8 cursor-pointer"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                  />
-                </svg>
+                <div className="flex gap-1 items-center text-sm cursor-pointer ">
+                  <p>Next</p>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-6 sm:size-7 cursor-pointer"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m8.25 4.5 7.5 7.5-7.5 7.5"
+                    />
+                  </svg>
+                </div>
               </div>
             )}
           </>
@@ -163,7 +171,12 @@ const Home = () => {
       </section>
 
       {/* Trending */}
-      <section className="px-2 sm:px-6 my-16 py-2">
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="px-2 sm:px-6 my-16 py-2"
+      >
         <p className="font-extrabold text-xl sm:text-2xl mb-4">Trending ⚡</p>
         <div className="flex gap-8 mt-5 flex-col-reverse sm:flex-row items-center">
           <img
@@ -178,14 +191,14 @@ const Home = () => {
             <p className="mb-5">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit.
               Perspiciatis voluptatibus iure id exercitationem enim? Eligendi
-              porro facilis aliquam perspiciatis totam!
+              porro facilis.
             </p>
             <button className="bg-blue-500 text-white font-semibold py-1 px-2 rounded-sm">
               View Course
             </button>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Affiliate Signup */}
       <section className="px-2 sm:px-6 py-2">

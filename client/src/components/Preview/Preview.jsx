@@ -1,5 +1,7 @@
 import Video from "../../assets/vid.mp4";
 
+import { motion } from "motion/react";
+
 const Preview = ({ setViewPreview }) => {
   function handleViewPreview() {
     setViewPreview(false);
@@ -23,7 +25,14 @@ const Preview = ({ setViewPreview }) => {
               d="M6 18 18 6M6 6l12 12"
             />
           </svg>
-          <video src={Video} controls className="w-full rounded-sm"></video>
+          <motion.video
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            src={Video}
+            controls
+            className="w-full rounded-sm"
+          ></motion.video>
         </div>
       </section>
     </>

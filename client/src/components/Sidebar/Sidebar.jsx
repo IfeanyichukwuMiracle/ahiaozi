@@ -19,10 +19,8 @@ const Sidebar = ({ dashboardNav }) => {
                 <Link key={nav} to={`/dashboard/${nav}`}>
                   <nav
                     className={`${
-                      dashboardNav === nav
-                        ? "bg-blue-50 text-blue-600"
-                        : "bg-[#fefefe] text-black"
-                    } capitalize cursor-pointer transition-all hover:bg-blue-50 hover:text-blue-600 w-max py-1 px-2 rounded-sm`}
+                      dashboardNav === nav ? "text-blue-600" : "text-black"
+                    } capitalize cursor-pointer transition-all hover:text-blue-600 w-max py-1 px-2 rounded-sm`}
                   >
                     {nav.split("-").join(" ")}
                   </nav>
@@ -35,10 +33,8 @@ const Sidebar = ({ dashboardNav }) => {
                 <Link key={nav} to={`/dashboard/${nav}`}>
                   <nav
                     className={`${
-                      dashboardNav === nav
-                        ? "bg-blue-50 text-blue-600"
-                        : "bg-[#fefefe] text-black"
-                    } capitalize cursor-pointer transition-all hover:bg-blue-50 hover:text-blue-600 w-max py-1 px-2 rounded-sm`}
+                      dashboardNav === nav ? "text-blue-600" : "text-black"
+                    } capitalize cursor-pointer transition-all hover:text-blue-600 w-max py-1 px-2 rounded-sm`}
                   >
                     {nav.split("-").join(" ")}
                   </nav>

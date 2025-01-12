@@ -1,15 +1,19 @@
 import { useState } from "react";
 import { Footer, Header } from "../../components";
 
+import { motion, AnimatePresence } from "motion/react";
+
 const Profile = () => {
   const [profile, setProfile] = useState("personal");
   const [updatePassword, setUpdatePassword] = useState(false);
 
   return (
     <>
-      {updatePassword && (
-        <UpdatePassword setUpdatePassword={setUpdatePassword} />
-      )}
+      <AnimatePresence>
+        {updatePassword && (
+          <UpdatePassword key={"box"} setUpdatePassword={setUpdatePassword} />
+        )}
+      </AnimatePresence>
 
       {/* password update */}
       <section
@@ -184,7 +188,12 @@ function UpdatePassword({ setUpdatePassword }) {
   return (
     <>
       <section className="fixed flex p-2 sm:p-6 items-center justify-center z-[100] top-0 w-full bg-gray-900 bg-opacity-50 h-screen">
-        <div className="bg-[#fefefe] p-4 rounded-sm w-full sm:w-[50%] sm:min-w-[20rem] shadow-md relative">
+        <motion.div
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0 }}
+          className="bg-[#fefefe] p-4 rounded-sm w-full sm:w-[50%] sm:min-w-[20rem] shadow-md relative"
+        >
           <svg
             onClick={() => setUpdatePassword(false)}
             xmlns="http://www.w3.org/2000/svg"
@@ -231,7 +240,7 @@ function UpdatePassword({ setUpdatePassword }) {
               {isPwd ? "Update Password" : "Verify Password"}
             </button>
           </form>
-        </div>
+        </motion.div>
       </section>
     </>
   );

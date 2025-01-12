@@ -5,6 +5,8 @@ import Menu from "../Menu/Menu";
 import { Context } from "../../context/AppContext";
 import toast, { Toaster } from "react-hot-toast";
 
+import { AnimatePresence } from "motion/react";
+
 const Header = ({ sticky }) => {
   const [showCart, setShowCart] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
@@ -26,7 +28,9 @@ const Header = ({ sticky }) => {
     <>
       <Toaster />
       {/* popup cart */}
-      {showCart && <Cart setShowCart={setShowCart} />}
+      <AnimatePresence>
+        {showCart && <Cart setShowCart={setShowCart} key={"box"} />}
+      </AnimatePresence>
       {/* popup menu */}
       <Menu showMenu={showMenu} setShowMenu={setShowMenu} />
 
@@ -96,7 +100,7 @@ const Header = ({ sticky }) => {
             </button>
           ) : (
             <Link to={`/auth/signup`}>
-              <button className="hidden sm:block border-[1.95px] pb-1 px-2 text-blue-500 hover:bg-blue-50 transition-all border-blue-500 rounded-sm">
+              <button className="hidden sm:block border pb-1 px-2 text-blue-500 hover:bg-blue-50 transition-all border-blue-500 rounded-sm">
                 Sign up
               </button>
             </Link>

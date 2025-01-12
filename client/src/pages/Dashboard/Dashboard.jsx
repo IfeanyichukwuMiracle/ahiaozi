@@ -5,6 +5,8 @@ import { Context } from "../../context/AppContext";
 import { Link, useParams } from "react-router-dom";
 import { tutor_navs, affiliate_navs } from "../../dashboard_nav";
 
+import { motion, AnimatePresence } from "motion/react";
+
 const Dashboard = () => {
   const { dashboardNav } = useParams();
   const [showMenu, setShowMenu] = useState(false);
@@ -20,7 +22,9 @@ const Dashboard = () => {
           {/* banner */}
           <div className="flex items-center justify-between pb-3 border-b border-gray-200 relative">
             {/* settings */}
-            {showSettings && <Settings />}
+            <AnimatePresence>
+              {showSettings && <Settings key={"hello"} />}
+            </AnimatePresence>
             <p className="font-bold text-xl sm:text-2xl">
               Good Evening, Mike 😁
             </p>
@@ -273,28 +277,51 @@ const Dashboard = () => {
 function Settings() {
   const { state } = useContext(Context);
   return (
-    <>
-      <div className="bg-[#fefefe] shadow-md rounded-sm absolute -bottom-[10.1rem] right-4 w-max">
-        <Link to={`/profile/userId`}>
-          <p className="px-3 py-2 cursor-pointer hover:bg-gray-50 transition-all flex items-center gap-1">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
-              />
-            </svg>
-            Profile
-          </p>
-        </Link>
-        <p className="px-3 py-2 cursor-pointer border-gray-100 border-t hover:bg-gray-50 transition-all flex items-center gap-1">
+    <motion.div
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      exit={{ scale: 0, opacity: 0 }}
+      key={"box"}
+      className="bg-[#fefefe] shadow-md rounded-sm absolute -bottom-[10.1rem] right-4 w-max"
+    >
+      <Link to={`/profile/userId`}>
+        <p className="px-3 py-2 cursor-pointer hover:bg-gray-50 transition-all flex items-center gap-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="size-5"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"
+            />
+          </svg>
+          Profile
+        </p>
+      </Link>
+      <p className="px-3 py-2 cursor-pointer border-gray-100 border-t hover:bg-gray-50 transition-all flex items-center gap-1">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="size-5"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3"
+          />
+        </svg>
+        Switch to Customer
+      </p>
+      {state.role === "tutor" && (
+        <p className="px-3 py-2 cursor-pointer border-t border-gray-100 border-b hover:bg-gray-50 transition-all flex items-center gap-1">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -309,47 +336,11 @@ function Settings() {
               d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3"
             />
           </svg>
-          Switch to Customer
+          Switch to Affiliate
         </p>
-        {state.role === "tutor" && (
-          <p className="px-3 py-2 cursor-pointer border-t border-gray-100 border-b hover:bg-gray-50 transition-all flex items-center gap-1">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3"
-              />
-            </svg>
-            Switch to Affiliate
-          </p>
-        )}
-        {state.role === "affiliate" && (
-          <p className="px-3 py-2 cursor-pointer border-t border-gray-100 border-b hover:bg-gray-50 transition-all flex items-center gap-1">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3"
-              />
-            </svg>
-            Switch to Tutor
-          </p>
-        )}
-        <p className="text-red-500 px-3 py-2 cursor-pointer hover:bg-gray-50 transition-all flex items-center gap-1">
+      )}
+      {state.role === "affiliate" && (
+        <p className="px-3 py-2 cursor-pointer border-t border-gray-100 border-b hover:bg-gray-50 transition-all flex items-center gap-1">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -361,13 +352,30 @@ function Settings() {
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"
+              d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3"
             />
           </svg>
-          Logout
+          Switch to Tutor
         </p>
-      </div>
-    </>
+      )}
+      <p className="text-red-500 px-3 py-2 cursor-pointer hover:bg-gray-50 transition-all flex items-center gap-1">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="size-5"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9"
+          />
+        </svg>
+        Logout
+      </p>
+    </motion.div>
   );
 }
 

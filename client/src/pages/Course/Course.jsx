@@ -8,6 +8,8 @@ import { SpinnerCircular } from "spinners-react";
 import { Context } from "../../context/AppContext.jsx";
 import toast, { Toaster } from "react-hot-toast";
 
+import { AnimatePresence } from "motion/react";
+
 const Course = () => {
   const { courseId } = useParams();
   const { state, dispatch } = useContext(Context);
@@ -46,7 +48,9 @@ const Course = () => {
     <>
       <Toaster />
       <Header sticky={false} />
-      {viewPreview && <Preview setViewPreview={setViewPreview} />}
+      <AnimatePresence>
+        {viewPreview && <Preview setViewPreview={setViewPreview} key="box" />}
+      </AnimatePresence>
 
       {/* sticky course info */}
       {result?.data?.data && (
