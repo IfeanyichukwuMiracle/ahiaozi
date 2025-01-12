@@ -12,12 +12,14 @@ import notFound from "./middlewares/notFound";
 
 import AuthRouter from "./routes/auth";
 import CourseRouter from "./routes/courses";
+import UserRouter from "./routes/user";
 
 // Using json middleware
 app.use(express.json());
 
 // Route middlewares
 app.use("/api/v0/auth/", AuthRouter);
+app.use("/api/v0/user/", UserRouter);
 app.use("/api/v0/course/", CourseRouter);
 
 // Security middlewares

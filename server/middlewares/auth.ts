@@ -13,13 +13,14 @@ const authenticate = async (
 ): Promise<void> => {
   try {
     const authorization = req?.headers?.authorization;
-    const token = authorization?.split(" ");
+    const token = authorization?.split(" ")[1];
 
     if (!authorization || !authorization?.startsWith("Bearer ")) {
       res.status(Stat.Unauthorized).json({ msg: "Unauthorized!!" });
+      return;
     }
 
-    const payload = jwt.decode(token, process.env.JWT_SECRET);
+    const payload = jwt.verify(token, process.env.JWT_SECRET);
     req.user = { ...payload };
     next();
   } catch (err) {
