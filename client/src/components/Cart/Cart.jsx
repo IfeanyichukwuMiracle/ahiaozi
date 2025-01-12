@@ -123,16 +123,15 @@ const Cart = ({ setShowCart }) => {
                 </svg>
 
                 <p className="font-semibold text-xl">Cart is empty</p>
-                <Link
+                <button
                   onClick={() => {
                     setShowCart(false);
                   }}
-                  to={`/`}
                 >
                   <p className="text-blue-600 underline cursor-pointer">
                     Get Courses.
                   </p>
-                </Link>
+                </button>
               </div>
             </div>
           )}

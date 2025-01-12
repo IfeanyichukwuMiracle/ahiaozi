@@ -8,7 +8,7 @@ const Preview = ({ setViewPreview }) => {
   }
   return (
     <>
-      <section className="w-full px-2 sm:px-6 h-screen fixed flex justify-center items-center top-0 z-50 bg-gray-900 bg-opacity-50 backdrop-blur-sm">
+      <section className="w-full px-2 sm:px-6 h-screen fixed flex justify-center items-center top-0 z-50 bg-gray-900 bg-opacity-50">
         <div className="w-[99%] sm:w-[30rem] h-max relative">
           <svg
             onClick={handleViewPreview}
