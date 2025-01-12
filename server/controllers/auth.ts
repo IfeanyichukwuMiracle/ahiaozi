@@ -36,7 +36,7 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
     if (password.length < 8) {
       res
         .status(Stat.BadRequest)
-        .json({ msg: "Password must me up to 8 characters" });
+        .json({ msg: "Password must be up to 8 characters" });
       return;
     }
 

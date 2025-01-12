@@ -1,3 +1,5 @@
+const bcrypt = require("bcryptjs");
+
 import { HttpStatusCodes as Stat } from "../config/http";
 
 import { userModel as User } from "../models/user";
@@ -66,9 +68,45 @@ export const updatePassword = async (
   res: Response
 ): Promise<void> => {
   try {
-    res.status(Stat.OK).json({
-      msg: "successful",
-    });
+    const { oldPassword, newPassword, confirmPassword } = req.body;
+    const id = req?.user?.id;
+
+    if (!oldPassword || !newPassword || !confirmPassword) {
+      res.status(Stat.NotFound).json({ msg: "All fields are required" });
+      return;
+    }
+
+    const user = await User.findById(id);
+    const passwordCorrect = await bcrypt.compare(oldPassword, user?.password);
+    if (!passwordCorrect) {
+      res.status(Stat.BadRequest).json({ msg: "Old password is not correct" });
+      return;
+    }
+
+    if (newPassword.length < 8) {
+      res
+        .status(Stat.BadRequest)
+        .json({ msg: "Password must be up to 8 characters" });
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      res.status(Stat.BadRequest).json({ msg: "Passwords do not match" });
+      return;
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { password: hashedPassword },
+      { new: true, runValidators: true }
+    );
+
+    res
+      .status(Stat.OK)
+      .json({ msg: "password updated successfully", user: updatedUser?._id });
   } catch (err) {
     res.status(Stat.ServerError).json({ msg: "Oops! An error occurred", err });
   }
