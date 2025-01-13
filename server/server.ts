@@ -19,8 +19,8 @@ app.use(express.json());
 
 // Route middlewares
 app.use("/api/v0/auth/", AuthRouter);
-app.use("/api/v0/user/", UserRouter);
-app.use("/api/v0/course/", CourseRouter);
+app.use("/api/v0/users/", UserRouter);
+app.use("/api/v0/courses/", CourseRouter);
 
 // Security middlewares
 app.use(cors());

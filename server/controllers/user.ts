@@ -12,6 +12,30 @@ interface DataObjType {
   email?: string;
 }
 
+export const getAllUsers = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const users = await User.find({}).select("-password");
+
+    res.status(Stat.OK).json({ msg: "successfull", users });
+  } catch (err) {
+    res.status(Stat.ServerError).json({ msg: "Oops! An error occurred", err });
+  }
+};
+
+export const getUser = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id).select("-password");
+
+    res.status(Stat.OK).json({ msg: "successfull", user });
+  } catch (err) {
+    res.status(Stat.ServerError).json({ msg: "Oops! An error occurred", err });
+  }
+};
+
 export const editUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const { firstname, lastname, email } = req.body;
@@ -107,6 +131,23 @@ export const updatePassword = async (
     res
       .status(Stat.OK)
       .json({ msg: "password updated successfully", user: updatedUser?._id });
+  } catch (err) {
+    res.status(Stat.ServerError).json({ msg: "Oops! An error occurred", err });
+  }
+};
+
+export const removeUser = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findByIdAndDelete(id);
+
+    res
+      .status(Stat.NoContent)
+      .json({ msg: `user ${user?._id} deleted successfully` });
   } catch (err) {
     res.status(Stat.ServerError).json({ msg: "Oops! An error occurred", err });
   }
