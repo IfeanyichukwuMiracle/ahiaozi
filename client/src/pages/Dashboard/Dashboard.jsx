@@ -4,6 +4,7 @@ import Menu from "../../components/Menu/Menu";
 import { Context } from "../../context/AppContext";
 import { Link, useParams } from "react-router-dom";
 import { tutor_navs, affiliate_navs } from "../../dashboard_nav";
+import {MarketCard} from "../../components"
 
 import { motion, AnimatePresence } from "motion/react";
 
@@ -296,7 +297,50 @@ const Dashboard = () => {
           {/* marketplace */}
           {dashboardNav === "marketplace" && (
             <>
-              <p>Marketplace</p>
+              <section className="w-full py-8 grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 gap-8">
+                {[1,2,3,4,5,6].map(course => {
+                  return <MarketCard key={course} />
+                  
+                })}
+              </section>
+              <div className="flex justify-between items-center mt-10">
+                <div className="flex items-center gap-1 hover:bg-[#fbfbfb] transition-all py-1 px-2 rounded-sm cursor-pointer hover:shadow-sm">
+                  {/* prev icon */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
+                    />
+                  </svg>
+                  <p className="text-[.92rem]">Previous</p>
+                </div>
+                <div className="flex items-center gap-1 hover:bg-[#fbfbfb] transition-all py-1 px-2 rounded-sm cursor-pointer hover:shadow-sm">
+                  {/* next icon */}
+                  <p className="text-[.92rem]">Next</p>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m15 15 6-6m0 0-6-6m6 6H9a6 6 0 0 0 0 12h3"
+                    />
+                  </svg>
+                </div>
+              </div>
             </>
           )}
         </section>

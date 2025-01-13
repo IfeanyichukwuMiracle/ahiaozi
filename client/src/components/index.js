@@ -4,5 +4,6 @@ import Card from "./Card/Card";
 import Preview from "./Preview/Preview";
 import Sidebar from "./Sidebar/Sidebar";
 import Form from "./Form/Form";
+import MarketCard from "./MarketCard/MarketCard"
 
-export { Footer, Preview, Header, Card, Sidebar, Form };
+export { Footer, Preview, Header, Card, Sidebar, Form, MarketCard };

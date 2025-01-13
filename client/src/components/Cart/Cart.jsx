@@ -63,7 +63,7 @@ const Cart = ({ setShowCart }) => {
                       key={course._id}
                       className="flex flex-col sm:flex-row justify-between gap-2 w-full py-2 border-b border-gray-200"
                     >
-                      <div className="flex gap-2 w-full sm:w-[86%]">
+                      <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-[86%]">
                         <img
                           src={courseImg}
                           alt="course"

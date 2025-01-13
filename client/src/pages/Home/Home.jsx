@@ -27,7 +27,7 @@ const Home = () => {
       <motion.section
         initial={{ opacity: 0, translateY: 350 }}
         whileInView={{ opacity: 1, translateY: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.5 }}
         viewport={{ once: true }}
         className="px-2 sm:px-6 py-7 sm:py-[4rem] flex items-center flex-col sm:flex-row gap-10"
       >
@@ -186,7 +186,7 @@ const Home = () => {
       <motion.section
         initial={{ opacity: 0, translateY: 350 }}
         whileInView={{ opacity: 1, translateY: 0 }}
-        transition={{ duration: 0.6 }}
+        transition={{ duration: 0.5 }}
         viewport={{ once: true }}
         className="px-2 sm:px-6 my-16 py-2"
       >
@@ -195,9 +195,9 @@ const Home = () => {
           <img
             src={course_img}
             alt="trending course"
-            className="block w-full rounded-sm shadow-lg hover:scale-[1.01] hover:shadow-xl transition-all cursor-pointer "
+            className="block w-full sm:w-[50%] rounded-sm shadow-lg hover:scale-[1.01] hover:shadow-xl transition-all cursor-pointer "
           />
-          <div className="w-full">
+          <div className="w-full sm:w-[50%] ">
             <p className="font-extrabold text-2xl mb-3">
               Digital Marketing Fundamentals
             </p>
