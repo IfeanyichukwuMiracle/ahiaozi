@@ -40,17 +40,31 @@ const Header = ({ sticky }) => {
           sticky ? "sticky top-0" : "relative"
         } z-50 shadow-lg w-full flex justify-between items-center bg-[#fefefe] sm:py-4 sm:px-6 py-3 px-2`}
       >
-        <Link to={"/"} className="text-black">
+        <Link
+          to={"/"}
+          onClick={() => window.scroll({ top: 0, left: 0, behavior: "smooth" })}
+          className="text-black"
+        >
           <p className="font-bold text-lg">Infomart</p>
         </Link>
         <div className="sm:flex sm:gap-4 hidden text-[.95rem]">
           {state.token && (
-            <Link to={`/my-courses`}>
+            <Link
+              to={`/my-courses`}
+              onClick={() =>
+                window.scroll({ top: 0, left: 0, behavior: "smooth" })
+              }
+            >
               <nav>My Courses</nav>
             </Link>
           )}
           {state.role === "tutor" || state.role === "affiliate" ? (
-            <Link to={`/dashboard/overview`}>
+            <Link
+              to={`/dashboard/overview`}
+              onClick={() =>
+                window.scroll({ top: 0, left: 0, behavior: "smooth" })
+              }
+            >
               <nav>Dashboard</nav>
             </Link>
           ) : (
@@ -65,7 +79,13 @@ const Header = ({ sticky }) => {
           )}
           {!state.token && (
             <nav>
-              <Link to={`/auth/signup`} style={{ color: "black" }}>
+              <Link
+                to={`/auth/signup`}
+                style={{ color: "black" }}
+                onClick={() =>
+                  window.scroll({ top: 0, left: 0, behavior: "smooth" })
+                }
+              >
                 Sign up
               </Link>
             </nav>
@@ -99,7 +119,12 @@ const Header = ({ sticky }) => {
               Logout
             </button>
           ) : (
-            <Link to={`/auth/signup`}>
+            <Link
+              to={`/auth/signup`}
+              onClick={() =>
+                window.scroll({ top: 0, left: 0, behavior: "smooth" })
+              }
+            >
               <button className="hidden sm:block border pb-1 px-2 text-blue-500 hover:bg-blue-50 transition-all border-blue-500 rounded-sm">
                 Sign up
               </button>

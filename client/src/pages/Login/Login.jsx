@@ -92,7 +92,13 @@ const Login = () => {
             </button>
             <p className="mt-1 text-sm text-center">
               Don&apos;t have an account?{" "}
-              <Link to={`/auth/signup`} className="text-blue-600 underline">
+              <Link
+                to={`/auth/signup`}
+                onClick={() =>
+                  window.scroll({ top: 0, left: 0, behavior: "smooth" })
+                }
+                className="text-blue-600 underline"
+              >
                 Signup
               </Link>
             </p>

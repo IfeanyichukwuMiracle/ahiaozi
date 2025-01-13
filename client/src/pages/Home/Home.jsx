@@ -24,7 +24,13 @@ const Home = () => {
       <Header sticky={true} />
 
       {/* hero section */}
-      <section className="px-2 sm:px-6 py-7 sm:py-[4rem] flex items-center flex-col sm:flex-row gap-10">
+      <motion.section
+        initial={{ opacity: 0, translateY: 350 }}
+        whileInView={{ opacity: 1, translateY: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+        className="px-2 sm:px-6 py-7 sm:py-[4rem] flex items-center flex-col sm:flex-row gap-10"
+      >
         <div className="sm:w-[60%] w-full">
           <p
             className="font-extrabold text-2xl sm:text-3xl mb-3"
@@ -76,7 +82,7 @@ const Home = () => {
             loading="lazy"
           />
         </div>
-      </section>
+      </motion.section>
 
       {/* categories */}
       <section className="w-full px-2 py-4 sm:px-6 my-5 sm:mt-0 sm:mb-14 bg-[#fcfcfc] text-sm flex flex-wrap gap-2 justify-center">
@@ -118,7 +124,13 @@ const Home = () => {
               {result?.data?.data?.data?.length > 0 ? (
                 result?.data.data.data.map((course) => {
                   return (
-                    <Link key={course._id} to={`/course/${course._id}`}>
+                    <Link
+                      key={course._id}
+                      to={`/course/${course._id}`}
+                      onClick={() =>
+                        window.scroll({ top: 0, left: 0, behavior: "smooth" })
+                      }
+                    >
                       <Card {...course} />
                     </Link>
                   );
@@ -172,8 +184,9 @@ const Home = () => {
 
       {/* Trending */}
       <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
+        initial={{ opacity: 0, translateY: 350 }}
+        whileInView={{ opacity: 1, translateY: 0 }}
+        transition={{ duration: 0.6 }}
         viewport={{ once: true }}
         className="px-2 sm:px-6 my-16 py-2"
       >
@@ -202,7 +215,7 @@ const Home = () => {
 
       {/* Affiliate Signup */}
       <section className="px-2 sm:px-6 py-2">
-        <div className="bg-blue-50 p-4 rounded-sm shadow-lg">
+        <div className="bg-blue-50 p-4 rounded-sm">
           <p className="font-bold text-xl sm:text-2xl mb-3">
             Signup as an Affiliate
           </p>

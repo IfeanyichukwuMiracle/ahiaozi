@@ -61,15 +61,15 @@ const Cart = ({ setShowCart }) => {
                   return (
                     <div
                       key={course._id}
-                      className="flex justify-between gap-2 w-full py-2 border-b border-gray-200"
+                      className="flex flex-col sm:flex-row justify-between gap-2 w-full py-2 border-b border-gray-200"
                     >
-                      <div className="flex gap-2 w-[86%]">
+                      <div className="flex gap-2 w-full sm:w-[86%]">
                         <img
                           src={courseImg}
                           alt="course"
-                          className="block w-[40%]"
+                          className="block w-full sm:w-[40%]"
                         />
-                        <div>
+                        <div className="w-full sm:w-[60%] ">
                           <p className="font-semibold">{course.name}</p>
                           <p className="text-[.83rem]">
                             By :&nbsp;
@@ -77,7 +77,7 @@ const Cart = ({ setShowCart }) => {
                               " " +
                               course.tutor.lastname}
                           </p>
-                          <p className="font-bold text-lg">
+                          <p className="font-bold text-lg text-blue-500">
                             &#8358;{course.price}
                           </p>
                         </div>

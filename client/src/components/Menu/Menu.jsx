@@ -43,11 +43,22 @@ const Menu = ({ setShowMenu, showMenu }) => {
         </svg>
 
         <div className="flex flex-col mt-7 gap-6 text-lg">
-          <Link to={`/`}>
+          <Link
+            to={`/`}
+            onClick={() =>
+              window.scroll({ top: 0, left: 0, behavior: "smooth" })
+            }
+          >
             <nav>Home</nav>
           </Link>
           {state.role === "tutor" || state.role === "affiliate" ? (
-            <Link to={`/dashboard/overview`}>
+            <Link
+              to={`/dashboard/overview`}
+              onClick={() => {
+                window.scroll({ top: 0, left: 0, behavior: "smooth" });
+                setShowMenu(false);
+              }}
+            >
               <nav>Dashboard</nav>
             </Link>
           ) : (
@@ -60,25 +71,53 @@ const Menu = ({ setShowMenu, showMenu }) => {
               </nav>
             </>
           )}
-          <Link to={`/cart`}>
+          <Link
+            to={`/cart`}
+            onClick={() =>
+              window.scroll({ top: 0, left: 0, behavior: "smooth" })
+            }
+          >
             <nav>Cart</nav>
           </Link>
           {state.token && (
-            <Link to={`/my-courses`}>
+            <Link
+              to={`/my-courses`}
+              onClick={() =>
+                window.scroll({ top: 0, left: 0, behavior: "smooth" })
+              }
+            >
               <nav>My Courses</nav>
             </Link>
           )}
           {state.role === "affiliate" && (
-            <Link to={`/dashboard/marketplace`}>
+            <Link
+              to={`/dashboard/marketplace`}
+              onClick={() => {
+                window.scroll({ top: 0, left: 0, behavior: "smooth" });
+                setShowMenu(false);
+              }}
+            >
               <nav>Marketplace</nav>
             </Link>
           )}
           {state.role === "tutor" && (
             <>
-              <Link to={`/dashboard/courses`}>
+              <Link
+                to={`/dashboard/courses`}
+                onClick={() => {
+                  window.scroll({ top: 0, left: 0, behavior: "smooth" });
+                  setShowMenu(false);
+                }}
+              >
                 <nav>Courses</nav>
               </Link>
-              <Link to={`/dashboard/add-course`}>
+              <Link
+                to={`/dashboard/add-course`}
+                onClick={() => {
+                  window.scroll({ top: 0, left: 0, behavior: "smooth" });
+                  setShowMenu(false);
+                }}
+              >
                 <nav>Add Course</nav>
               </Link>
             </>
@@ -86,7 +125,12 @@ const Menu = ({ setShowMenu, showMenu }) => {
         </div>
         <div>
           {!state.token ? (
-            <Link to={`/auth/signup`}>
+            <Link
+              to={`/auth/signup`}
+              onClick={() => {
+                window.scroll({ top: 0, left: 0, behavior: "smooth" });
+              }}
+            >
               <button className="bg-blue-600 hover:bg-blue-500 transition-all text-white font-semibold w-full py-2 rounded-sm">
                 Signup
               </button>

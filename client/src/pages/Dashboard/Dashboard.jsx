@@ -12,13 +12,17 @@ const Dashboard = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
 
+  useEffect(() => {
+    window.scroll({ top: 0, left: 0, behavior: "smooth" });
+  }, [dashboardNav]);
+
   return (
     <DashboardNavProtector>
       <Menu showMenu={showMenu} setShowMenu={setShowMenu} />
 
       <section className="w-full flex relative">
-        <Sidebar dashboardNav={dashboardNav} />
-        <section className="py-5 w-full px-2 sm:px-6">
+        <Sidebar dashboardNav={dashboardNav} setShowMenu={setShowMenu} />
+        <section className="py-5 w-full overflow-x-hidden px-2 sm:px-6">
           {/* banner */}
           <div className="flex items-center justify-between pb-3 border-b border-gray-200 relative">
             {/* settings */}
@@ -194,88 +198,97 @@ const Dashboard = () => {
           {/* tutors courses */}
           {dashboardNav === "courses" && (
             <>
-              <section className="py-2 w-full my-6">
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((course) => {
-                  return (
-                    <div
-                      key={course}
-                      className="flex items-center cursor-pointer hover:bg-[#fbfbfb] transition-all justify-between w-full py-2 px-1 border-b border-gray-100"
-                    >
-                      <p className="font-semibold sm:text-[1.1rem]">
-                        How to run facebook ads #{course}...
-                      </p>
-                      <div className="flex gap-3 items-center">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="size-6 hover:text-green-400 transition-all"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
-                          />
-                        </svg>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth={1.5}
-                          stroke="currentColor"
-                          className="size-6 hover:text-red-400 transition-all"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
-                          />
-                        </svg>
-                      </div>
-                    </div>
-                  );
-                })}
-                <div className="flex gap-2 mt-10">
-                  <div className="flex items-center gap-1 bg-[#fbfbfb] py-1 px-2 rounded-sm cursor-pointer shadow-sm">
-                    {/* prev icon */}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="size-5"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
-                      />
-                    </svg>
-                    <p className="text-[.92rem]">Previous</p>
-                  </div>
-                  <div className="flex items-center gap-1 bg-[#fbfbfb] py-1 px-2 rounded-sm cursor-pointer shadow-sm">
-                    {/* next icon */}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="size-5"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="m15 15 6-6m0 0-6-6m6 6H9a6 6 0 0 0 0 12h3"
-                      />
-                    </svg>
-                    <p className="text-[.92rem]">Next</p>
-                  </div>
-                </div>
+              <section className="py-2 w-full my-6 overflow-x-scroll">
+                <table className="w-full min-w-[60rem] ">
+                  <tr className="border-b border-gray-200 text-left mb-4">
+                    <th className="py-2">Name</th>
+                    <th>Price</th>
+                    <th>Desc.</th>
+                    <th>Edit/Delete</th>
+                  </tr>
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((course) => {
+                    return (
+                      <tr key={course} className="border-b border-gray-200">
+                        <td className="text-base py-2 bg-gray-50 px-2">
+                          How to run faceboook ads #{course}...
+                        </td>
+                        <td className="text-base px-2">&#8358;90,000</td>
+                        <td className="text-base px-2 bg-gray-50 ">
+                          Lorem ipsum dolor sit amet...
+                        </td>
+                        <td className="px-2 py-2 flex gap-2 items-center">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="size-6 hover:text-green-400 transition-all"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10"
+                            />
+                          </svg>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="size-6 hover:text-red-400 transition-all"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+                            />
+                          </svg>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </table>
               </section>
+              <div className="flex justify-between items-center mt-10">
+                <div className="flex items-center gap-1 hover:bg-[#fbfbfb] transition-all py-1 px-2 rounded-sm cursor-pointer hover:shadow-sm">
+                  {/* prev icon */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3"
+                    />
+                  </svg>
+                  <p className="text-[.92rem]">Previous</p>
+                </div>
+                <div className="flex items-center gap-1 hover:bg-[#fbfbfb] transition-all py-1 px-2 rounded-sm cursor-pointer hover:shadow-sm">
+                  {/* next icon */}
+                  <p className="text-[.92rem]">Next</p>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m15 15 6-6m0 0-6-6m6 6H9a6 6 0 0 0 0 12h3"
+                    />
+                  </svg>
+                </div>
+              </div>
             </>
           )}
           {/* add course page */}

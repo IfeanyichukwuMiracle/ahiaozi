@@ -3,20 +3,30 @@ import { tutor_navs, affiliate_navs } from "../../dashboard_nav";
 import { useContext } from "react";
 import { Context } from "../../context/AppContext";
 
-const Sidebar = ({ dashboardNav }) => {
+const Sidebar = ({ dashboardNav, setShowMenu }) => {
   const { state } = useContext(Context);
 
   return (
     <section className="hidden sm:flex flex-col justify-between h-screen sticky min-w-[14rem] max-w-[15rem] p-5 bg-[#fefefe] border-r border-gray-200 top-0 left-0">
       <div>
-        <Link to={`/`}>
+        <Link
+          to={`/`}
+          onClick={() => window.scroll({ top: 0, left: 0, behavior: "smooth" })}
+        >
           <p className="font-bold text-lg mb-8 text-blue-600">Infomart</p>
         </Link>
         <div className="flex flex-col gap-6">
           {state.role === "tutor" &&
             tutor_navs.map((nav) => {
               return (
-                <Link key={nav} to={`/dashboard/${nav}`}>
+                <Link
+                  key={nav}
+                  to={`/dashboard/${nav}`}
+                  onClick={() => {
+                    window.scroll({ top: 0, left: 0, behavior: "smooth" });
+                    setShowMenu(false);
+                  }}
+                >
                   <nav
                     className={`${
                       dashboardNav === nav ? "text-blue-600" : "text-black"
@@ -30,7 +40,14 @@ const Sidebar = ({ dashboardNav }) => {
           {state.role === "affiliate" &&
             affiliate_navs.map((nav) => {
               return (
-                <Link key={nav} to={`/dashboard/${nav}`}>
+                <Link
+                  key={nav}
+                  to={`/dashboard/${nav}`}
+                  onClick={() => {
+                    window.scroll({ top: 0, left: 0, behavior: "smooth" });
+                    setShowMenu(false);
+                  }}
+                >
                   <nav
                     className={`${
                       dashboardNav === nav ? "text-blue-600" : "text-black"
