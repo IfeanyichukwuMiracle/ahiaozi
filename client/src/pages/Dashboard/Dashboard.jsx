@@ -4,7 +4,7 @@ import Menu from "../../components/Menu/Menu";
 import { Context } from "../../context/AppContext";
 import { Link, useParams } from "react-router-dom";
 import { tutor_navs, affiliate_navs } from "../../dashboard_nav";
-import {MarketCard} from "../../components"
+import {MarketCard,Indicator,Indicator2} from "../../components"
 
 import { motion, AnimatePresence } from "motion/react";
 
@@ -30,9 +30,11 @@ const Dashboard = () => {
             <AnimatePresence>
               {showSettings && <Settings key={"hello"} />}
             </AnimatePresence>
-            <p className="font-bold text-xl sm:text-2xl flex items-center gap-3">
-              {/* ettings icon */}
-              <svg
+            <div className="font-bold text-xl sm:text-2xl flex items-center gap-3">
+<div className="relative block sm:hidden" >
+  <Indicator/>
+                {/* ettings icon */}
+                <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -52,9 +54,13 @@ const Dashboard = () => {
                   d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
                 />
               </svg>
+</div>
               Good Evening, Mike 😁
-            </p>
+            </div>
             <div className="flex items-center gap-2">
+<div className="relative sm:block hidden" >
+<Indicator />
+
               {/* ettings icon */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -76,6 +82,8 @@ const Dashboard = () => {
                   d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
                 />
               </svg>
+</div>
+
               {/* menu icon */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -362,7 +370,7 @@ function Settings() {
       className="bg-[#fefefe] shadow-md rounded-sm absolute -bottom-[10.2rem] left-3 sm:left-[69%] lg:left-[80%] w-max"
     >
       <Link to={`/profile/userId`}>
-        <p className="px-3 py-2 cursor-pointer hover:bg-gray-50 transition-all flex items-center gap-1">
+        <div className="px-3 py-2 relative cursor-pointer hover:bg-gray-50 transition-all flex items-center gap-1">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -378,7 +386,8 @@ function Settings() {
             />
           </svg>
           Profile
-        </p>
+          <Indicator2 />
+        </div>
       </Link>
       <p className="px-3 py-2 cursor-pointer border-gray-100 border-t hover:bg-gray-50 transition-all flex items-center gap-1">
         <svg
