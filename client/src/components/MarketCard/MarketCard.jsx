@@ -3,9 +3,10 @@ import {motion} from "motion/react"
 
 import toast, {Toaster} from "react-hot-toast"
 
-const MarketCard = () => {
+const MarketCard = ({id}) => {
 
 function copyLink() {
+  navigator.clipboard.writeText(`https://link-${id}-copied.com/`)
   toast.success("Affiliate Link Copied!")
 }
 

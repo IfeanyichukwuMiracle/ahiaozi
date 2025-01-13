@@ -299,8 +299,7 @@ const Dashboard = () => {
             <>
               <section className="w-full py-8 grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 gap-8">
                 {[1,2,3,4,5,6].map(course => {
-                  return <MarketCard key={course} />
-                  
+                  return <MarketCard key={course} id={course} />                 
                 })}
               </section>
               <div className="flex justify-between items-center mt-10">
