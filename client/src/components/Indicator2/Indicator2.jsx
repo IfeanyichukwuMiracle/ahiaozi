@@ -5,8 +5,8 @@ const Indicator2 = () => {
 <section>
 <motion.div animate={{opacity:[0.3,1,0.3]}} transition={{duration:1.5,repeat:Infinity}} className="bg-red-200 size-4 rounded-full flex items-center justify-center" >
    <div className="bg-red-600 rounded-full size-2" >
-   </motion.div>
-</div>
+   </div>
+</motion.div>
 </section>
   )
 }
