@@ -4,7 +4,7 @@ const courseSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "name is required"],
+      required: true,
     },
     enrolled: {
       type: Number,
@@ -12,32 +12,32 @@ const courseSchema = new mongoose.Schema(
     },
     price: {
       type: Number,
-      required: [true, "price is required"],
+      required: true,
     },
     tutor: {
       type: mongoose.Schema.ObjectId,
+      required: true,
       ref: "User",
     },
     description: {
       type: String,
-      required: [true, "description is required"],
+      required: true,
     },
     thumbnail: {
       type: String,
-      required: [true, "thumbnail is required"],
+      required: true,
     },
     previewVideo: {
       type: String,
-      required: [true, "preview video is required"],
+      required: true,
     },
     language: {
       type: String,
-      required: [true, "language is required"],
+      required: true,
     },
     commission: {
       type: Number,
       default: 0,
-      select: false,
     },
     moduleContent: [
       {
