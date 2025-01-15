@@ -126,9 +126,10 @@ const Menu = ({ setShowMenu, showMenu }) => {
                   >
                     <Link
                       to={`/dashboard/overview`}
-                      onClick={() =>
-                        window.scroll({ top: 0, left: 0, behavior: "smooth" })
-                      }
+                      onClick={() => {
+                        window.scroll({ top: 0, left: 0, behavior: "smooth" });
+                        setShowMenu(false);
+                      }}
                       className="px-4 py-2 border-b border-gray-100 hover:bg-gray-100 transition-all"
                     >
                       <nav>Overview</nav>
@@ -137,13 +138,14 @@ const Menu = ({ setShowMenu, showMenu }) => {
                       <>
                         <Link
                           to={`/dashboard/marketplace`}
-                          onClick={() =>
+                          onClick={() => {
                             window.scroll({
                               top: 0,
                               left: 0,
                               behavior: "smooth",
-                            })
-                          }
+                            });
+                            setShowMenu(false);
+                          }}
                           className="px-4 py-2 border-b border-gray-100 hover:bg-gray-100 transition-all"
                         >
                           <nav>Marketplace</nav>
@@ -154,26 +156,28 @@ const Menu = ({ setShowMenu, showMenu }) => {
                       <>
                         <Link
                           to={`/dashboard/courses`}
-                          onClick={() =>
+                          onClick={() => {
                             window.scroll({
                               top: 0,
                               left: 0,
                               behavior: "smooth",
-                            })
-                          }
+                            });
+                            setShowMenu(false);
+                          }}
                           className="px-4 py-2 border-b border-gray-100 hover:bg-gray-100 transition-all"
                         >
                           <nav>Courses</nav>
                         </Link>
                         <Link
                           to={`/dashboard/add-course`}
-                          onClick={() =>
+                          onClick={() => {
                             window.scroll({
                               top: 0,
                               left: 0,
                               behavior: "smooth",
-                            })
-                          }
+                            });
+                            setShowMenu(false);
+                          }}
                           className="px-4 py-2 border-b border-gray-100 hover:bg-gray-100 transition-all"
                         >
                           <nav>Add Course</nav>
