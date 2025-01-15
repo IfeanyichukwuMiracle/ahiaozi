@@ -5,12 +5,13 @@ import Menu from "../Menu/Menu";
 import { Context } from "../../context/AppContext";
 import toast, { Toaster } from "react-hot-toast";
 
-import { AnimatePresence } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 
 const Header = ({ sticky }) => {
   const [showCart, setShowCart] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const { state, dispatch } = useContext(Context);
+  const [dashboard, setDashboard] = useState(false);
 
   async function logout() {
     const toastId = toast.loading("Logging out...");
@@ -59,14 +60,112 @@ const Header = ({ sticky }) => {
             </Link>
           )}
           {state.role === "tutor" || state.role === "affiliate" ? (
-            <Link
-              to={`/dashboard/overview`}
-              onClick={() =>
-                window.scroll({ top: 0, left: 0, behavior: "smooth" })
-              }
-            >
-              <nav>Dashboard</nav>
-            </Link>
+            <div className="cursor-pointer relative">
+              <nav
+                className="flex gap-1 items-center"
+                onClick={() => setDashboard(!dashboard)}
+              >
+                <p>Dashboard</p>
+                {dashboard ? (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m4.5 15.75 7.5-7.5 7.5 7.5"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="size-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="m19.5 8.25-7.5 7.5-7.5-7.5"
+                    />
+                  </svg>
+                )}
+              </nav>
+              <AnimatePresence>
+                {dashboard && (
+                  <motion.section
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0 }}
+                    className="absolute -bottom-[7rem] bg-[#fefefe] rounded-sm shadow-md flex flex-col "
+                  >
+                    <Link
+                      to={`/dashboard/overview`}
+                      onClick={() =>
+                        window.scroll({ top: 0, left: 0, behavior: "smooth" })
+                      }
+                      className="px-4 py-2 border-b border-gray-100 hover:bg-gray-100 transition-all"
+                    >
+                      <nav>Overview</nav>
+                    </Link>
+                    {state.role === "affiliate" && (
+                      <>
+                        <Link
+                          to={`/dashboard/marketplace`}
+                          onClick={() =>
+                            window.scroll({
+                              top: 0,
+                              left: 0,
+                              behavior: "smooth",
+                            })
+                          }
+                          className="px-4 py-2 border-b border-gray-100 hover:bg-gray-100 transition-all"
+                        >
+                          <nav>Marketplace</nav>
+                        </Link>
+                      </>
+                    )}
+                    {state.role === "tutor" && (
+                      <>
+                        <Link
+                          to={`/dashboard/courses`}
+                          onClick={() =>
+                            window.scroll({
+                              top: 0,
+                              left: 0,
+                              behavior: "smooth",
+                            })
+                          }
+                          className="px-4 py-2 border-b border-gray-100 hover:bg-gray-100 transition-all"
+                        >
+                          <nav>Courses</nav>
+                        </Link>
+                        <Link
+                          to={`/dashboard/add-course`}
+                          onClick={() =>
+                            window.scroll({
+                              top: 0,
+                              left: 0,
+                              behavior: "smooth",
+                            })
+                          }
+                          className="px-4 py-2 border-b border-gray-100 hover:bg-gray-100 transition-all"
+                        >
+                          <nav>Add Course</nav>
+                        </Link>
+                      </>
+                    )}
+                  </motion.section>
+                )}
+              </AnimatePresence>
+            </div>
           ) : (
             <>
               <nav className="cursor-pointer" onClick={becomeAffiliate}>
