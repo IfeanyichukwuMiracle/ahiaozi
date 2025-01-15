@@ -122,7 +122,7 @@ const Menu = ({ setShowMenu, showMenu }) => {
                       state.role === "tutor" && "-bottom-[9rem]"
                     } ${
                       state.role === "affiliate" && "-bottom-[7rem]"
-                    } bg-[#fefefe] rounded-sm shadow-sm flex flex-col `}
+                    } bg-[#fefefe] rounded-sm shadow-sm flex flex-col w-max `}
                   >
                     <Link
                       to={`/dashboard/overview`}
