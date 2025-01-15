@@ -41,6 +41,7 @@ const Login = () => {
       }, 1800);
     } catch (e) {
       console.log(e);
+      toast.error("Login error!");
     } finally {
       toast.dismiss(toastId);
       setUser({
