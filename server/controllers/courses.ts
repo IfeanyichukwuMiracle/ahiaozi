@@ -4,15 +4,34 @@ import { courseModel as Course } from "../models/courses";
 
 import { Request, Response } from "express";
 
+interface QueryType {
+  tutor?: string;
+  language?: string;
+  page?: number;
+  limit?: number;
+}
+
 export const getAllCourses = async (
   req: Request,
   res: Response
 ): Promise<void> => {
   try {
-    const courses = await Course.find({}).populate(
-      "tutor",
-      "firstname lastname"
-    );
+    const { page, limit, tutor, language } = req.query as QueryType;
+    const skip = (Number(page) - 1) * Number(limit);
+
+    const queryObj: QueryType = {};
+
+    if (tutor) queryObj.tutor = tutor;
+    if (language) queryObj.language = language;
+
+    let tempCourses = Course.find({ ...queryObj })
+      .populate("tutor", "firstname lastname")
+      .sort("-createdAt");
+
+    if (page && limit)
+      tempCourses = tempCourses.limit(Number(limit)).skip(skip);
+
+    const courses = await tempCourses;
 
     res
       .status(Stat.OK)
