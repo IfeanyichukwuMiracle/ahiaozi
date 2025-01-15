@@ -118,7 +118,11 @@ const Menu = ({ setShowMenu, showMenu }) => {
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0 }}
-                    className="absolute -bottom-[7rem] bg-[#fefefe] rounded-sm shadow-sm flex flex-col "
+                    className={`absolute ${
+                      state.role === "tutor" && "-bottom-[9rem]"
+                    } ${
+                      state.role === "affiliate" && "-bottom-[7rem]"
+                    } bg-[#fefefe] rounded-sm shadow-sm flex flex-col `}
                   >
                     <Link
                       to={`/dashboard/overview`}
