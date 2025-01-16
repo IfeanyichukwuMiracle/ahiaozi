@@ -24,7 +24,7 @@ export const getAllCourses = async (
     if (tutor) queryObj.tutor = tutor;
     if (language) queryObj.language = language;
 
-    let tempCourses = Course.find({ ...queryObj })
+    let tempCourses = Course.find(queryObj)
       .populate("tutor", "firstname lastname")
       .sort("-createdAt");
 
@@ -35,9 +35,9 @@ export const getAllCourses = async (
 
     res
       .status(Stat.OK)
-      .json({ msg: "successful", rowCount: courses.length, courses });
+      .json({ msg: "successful", rowCount: courses.length, page, courses });
   } catch (err) {
-    res.status(Stat.ServerError).json({ msg: "Oops! An error occurred" });
+    res.status(Stat.ServerError).json({ msg: "Oops! An error occurred", err });
   }
 };
 
@@ -49,6 +49,13 @@ export const getCourse = async (req: Request, res: Response): Promise<void> => {
       "tutor",
       "firstname lastname"
     );
+
+    if (!course) {
+      res.status(Stat.NotFound).json({
+        msg: `no course with this id was found`,
+      });
+      return;
+    }
 
     res.status(Stat.OK).json({ msg: "successful", course });
   } catch (err) {
@@ -73,6 +80,8 @@ export const createCourse = async (
 
     const tutor = req?.user?.id;
 
+    const authority = req?.user?.role;
+
     if (
       !name ||
       !price ||
@@ -87,11 +96,25 @@ export const createCourse = async (
       return;
     }
 
-    const course = await Course.create({ ...req.body, tutor });
+    if (authority !== "tutor") {
+      res
+        .status(Stat.Unauthorized)
+        .json({ msg: "Sorry, you're not authorzied to create a course" });
+      return;
+    }
+
+    const courseObj = {
+      ...req.body,
+      tutor,
+      name: name.toLowerCase(),
+      description: description.toLowerCase(),
+      language: language.toLowerCase(),
+    };
+    const course = await Course.create({ ...courseObj });
 
     res.status(Stat.Created).json({ msg: "successful", course });
   } catch (err) {
-    res.status(Stat.ServerError).json({ msg: "Oops! An error occurred" });
+    res.status(Stat.ServerError).json({ msg: "Oops! An error occurred", err });
   }
 };
 
@@ -128,11 +151,26 @@ export const updateCourse = async (
       return;
     }
 
+    const courseObj = {
+      ...req.body,
+      tutor,
+      name: name.toLowerCase(),
+      description: description.toLowerCase(),
+      language: language.toLowerCase(),
+    };
+
     const updatedCourse = await Course.findByIdAndUpdate(
       id,
-      { ...req.body },
+      { ...courseObj },
       { new: true, runValidators: true }
     );
+
+    if (!updatedCourse) {
+      res.status(Stat.NotFound).json({
+        msg: `no course with this id was found`,
+      });
+      return;
+    }
 
     res.status(Stat.OK).json({ msg: "successful", updatedCourse });
   } catch (err) {
@@ -149,7 +187,14 @@ export const deleteCourse = async (
 
     const course = await Course.findByIdAndDelete(id);
 
-    res.status(Stat.NoContent).json({
+    if (!course) {
+      res.status(Stat.NotFound).json({
+        msg: `no course with this id was found`,
+      });
+      return;
+    }
+
+    res.status(Stat.OK).json({
       msg: `course with id: ${course?._id} has been deleted successfully`,
     });
   } catch (err) {

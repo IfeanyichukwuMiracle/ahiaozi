@@ -17,7 +17,7 @@ const courseSchema = new mongoose.Schema(
     tutor: {
       type: mongoose.Schema.ObjectId,
       required: true,
-      ref: "User",
+      ref: "Users",
     },
     description: {
       type: String,
@@ -35,8 +35,9 @@ const courseSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    commission: {
+    commision: {
       type: Number,
+      required: true,
       default: 0,
     },
     moduleContent: [
@@ -49,4 +50,4 @@ const courseSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export const courseModel = mongoose.model("courses", courseSchema);
+export const courseModel = mongoose.model("Courses", courseSchema);

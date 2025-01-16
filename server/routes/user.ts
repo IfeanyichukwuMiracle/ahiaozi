@@ -1,7 +1,7 @@
 const express = require("express");
 const UserRouter = express.Router();
 
-import authenticate from "../middlewares/auth";
+import auth from "../middlewares/auth";
 
 import {
   getAllUsers,
@@ -13,8 +13,8 @@ import {
 
 UserRouter.get("/all", getAllUsers)
   .get("/user/:id", getUser)
-  .patch("/edit", authenticate, editUser)
-  .patch("/pass", authenticate, updatePassword)
-  .delete("/user/:id", removeUser);
+  .patch("/edit", auth, editUser)
+  .patch("/pass", auth, updatePassword)
+  .delete("/user/:id", auth, removeUser);
 
 export default UserRouter;

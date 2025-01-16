@@ -57,7 +57,7 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
 
     const newUser = await User.create({ ...dataObj });
 
-    const token = jwt.sign({ id: newUser?._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: newUser?._id, role: newUser?.role }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_LIFETIME,
     });
 
@@ -95,9 +95,13 @@ export const signin = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    const token = jwt.sign({ id: user?._id }, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_LIFETIME,
-    });
+    const token = jwt.sign(
+      { id: user?._id, role: user?.role },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: process.env.JWT_LIFETIME,
+      }
+    );
 
     res
       .status(Stat.OK)

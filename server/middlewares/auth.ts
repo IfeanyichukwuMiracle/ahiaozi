@@ -6,7 +6,7 @@ import { HttpStatusCodes as Stat } from "../config/http";
 
 import { Request, Response, NextFunction } from "express";
 
-const authenticate = async (
+const auth = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -16,7 +16,7 @@ const authenticate = async (
     const token = authorization?.split(" ")[1];
 
     if (!authorization || !authorization?.startsWith("Bearer ")) {
-      res.status(Stat.Unauthorized).json({ msg: "Unauthorized!!" });
+      res.status(Stat.Unauthorized).json({ msg: "Not authenticated!!" });
       return;
     }
 
@@ -28,4 +28,4 @@ const authenticate = async (
   }
 };
 
-export default authenticate;
+export default auth;

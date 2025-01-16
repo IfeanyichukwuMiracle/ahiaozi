@@ -9,9 +9,11 @@ import {
   createCourse,
 } from "../controllers/courses";
 
+import auth from "../middlewares/auth";
+
 CourseRouter.get("/", getAllCourses)
   .get("/:id", getCourse)
-  .post("/", createCourse)
+  .post("/", auth, createCourse)
   .patch("/:id", updateCourse)
   .delete("/:id", deleteCourse);
 
