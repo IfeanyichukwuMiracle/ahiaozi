@@ -13,19 +13,21 @@ import notFound from "./middlewares/notFound";
 import AuthRouter from "./routes/auth";
 import CourseRouter from "./routes/courses";
 import UserRouter from "./routes/user";
+import CartRouter from "./routes/cart";
 
 // Using json middleware
 app.use(express.json());
-
-// Route middlewares
-app.use("/api/v0/auth/", AuthRouter);
-app.use("/api/v0/users/", UserRouter);
-app.use("/api/v0/courses/", CourseRouter);
 
 // Security middlewares
 app.use(cors());
 app.use(helmet());
 app.use(xss());
+
+// Route middlewares
+app.use("/api/v0/auth/", AuthRouter);
+app.use("/api/v0/users/", UserRouter);
+app.use("/api/v0/courses/", CourseRouter);
+app.use("/api/v0/cart/", CartRouter);
 
 // If route is not found
 app.use(notFound);
