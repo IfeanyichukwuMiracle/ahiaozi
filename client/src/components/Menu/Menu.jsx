@@ -63,7 +63,7 @@ const Menu = ({ setShowMenu, showMenu }) => {
           </Link>
           {state.token && (
             <Link
-              to={`/my-courses`}
+              to={`/my-courses/all-courses`}
               onClick={() => {
                 window.scroll({ top: 0, left: 0, behavior: "smooth" });
                 setShowMenu(false);

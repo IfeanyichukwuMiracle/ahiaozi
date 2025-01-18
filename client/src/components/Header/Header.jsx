@@ -47,7 +47,7 @@ const Header = ({ sticky }) => {
         <div className="sm:flex sm:gap-4 hidden text-[.95rem]">
           {state.token && (
             <Link
-              to={`/my-courses`}
+              to={`/my-courses/all-courses`}
               onClick={() =>
                 window.scroll({ top: 0, left: 0, behavior: "smooth" })
               }

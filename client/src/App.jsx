@@ -51,7 +51,7 @@ function App() {
           <Route path="/course/:courseId" element={<Course />} />
           <Route path="/cart" element={<Cart />} />
           <Route
-            path="/my-courses"
+            path="/my-courses/:type"
             element={
               <RouteProtector>
                 <MyCourses />

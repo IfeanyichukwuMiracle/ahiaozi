@@ -230,9 +230,11 @@ const Home = () => {
             refer courses to people - courses that are guaranteed to increase
             theri earning capacity - and <strong>earn</strong>
           </p>
-          <button className="bg-blue-500 text-white font-semibold py-1 px-2 rounded-sm mt-3">
-            Signup as an Affiliate
-          </button>
+          <Link to={`/auth/signup?role=affiliate`}>
+            <button className="bg-blue-500 text-white font-semibold py-1 px-2 rounded-sm mt-3">
+              Signup as an Affiliate
+            </button>
+          </Link>
         </div>
       </section>
 
@@ -249,9 +251,11 @@ const Home = () => {
             PAID. There are affiliates who are ready to refer your courses to
             people.
           </p>
-          <button className="bg-blue-500 text-white font-semibold py-1 px-2 rounded-sm mt-3">
-            Signup as an Affiliate
-          </button>
+          <Link to={`/auth/signup?role=tutor`}>
+            <button className="bg-blue-500 text-white font-semibold py-1 px-2 rounded-sm mt-3">
+              Signup as an Affiliate
+            </button>
+          </Link>
         </div>
       </section>
 
