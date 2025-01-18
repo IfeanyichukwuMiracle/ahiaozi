@@ -21,10 +21,6 @@ const Header = ({ sticky }) => {
     toast.success("Logged out!");
   }
 
-  async function becomeAffiliate() {}
-
-  async function becomeTutor() {}
-
   return (
     <>
       <Toaster />
@@ -172,12 +168,16 @@ const Header = ({ sticky }) => {
             </div>
           ) : (
             <>
-              <nav className="cursor-pointer" onClick={becomeAffiliate}>
-                Become an Affiliate
-              </nav>
-              <nav className="cursor-pointer" onClick={becomeTutor}>
-                Become a Tutor
-              </nav>
+              <Link to={`/auth/signup?role=affiliate`}>
+                <nav className="cursor-pointer text-black">
+                  Signup as an Affiliate
+                </nav>
+              </Link>
+              <Link to={`/auth/signup?role=tutor`}>
+                <nav className="cursor-pointer text-black">
+                  Signup as a Tutor
+                </nav>
+              </Link>
             </>
           )}
           {!state.token && (

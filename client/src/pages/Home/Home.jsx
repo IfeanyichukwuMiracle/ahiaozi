@@ -25,7 +25,7 @@ const Home = () => {
 
       {/* hero section */}
       <motion.section
-        initial={{ opacity: 0, translateY: 350 }}
+        initial={{ opacity: 0, translateY: 50 }}
         whileInView={{ opacity: 1, translateY: 0 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
@@ -33,10 +33,16 @@ const Home = () => {
       >
         <div className="sm:w-[60%] w-full">
           <p
-            className="font-extrabold text-2xl sm:text-3xl mb-3"
+            className="font-extrabold text-3xl sm:text-4xl mb-3"
             style={{ fontFamily: "var(--heading-font)" }}
           >
-            Udemy But For Relevant High Income Skills
+            Udemy But For Relevant{" "}
+            <span
+              style={{ fontFamily: "var(--heading-font)" }}
+              className="text-transparent bg-gradient-to-t from-blue-300 to-blue-600 bg-clip-text"
+            >
+              High Income Skills
+            </span>
           </p>
           <p className="text-base">
             Whether you&apos;re a customer/learner, an affiliate or tutor,
@@ -184,7 +190,7 @@ const Home = () => {
 
       {/* Trending */}
       <motion.section
-        initial={{ opacity: 0, translateY: 350 }}
+        initial={{ opacity: 0, translateY: 50 }}
         whileInView={{ opacity: 1, translateY: 0 }}
         transition={{ duration: 0.5 }}
         viewport={{ once: true }}
@@ -223,6 +229,25 @@ const Home = () => {
             Every course on infomart is created by an expert in their field,
             refer courses to people - courses that are guaranteed to increase
             theri earning capacity - and <strong>earn</strong>
+          </p>
+          <button className="bg-blue-500 text-white font-semibold py-1 px-2 rounded-sm mt-3">
+            Signup as an Affiliate
+          </button>
+        </div>
+      </section>
+
+      {/* Affiliate Signup */}
+      <section className="px-2 sm:px-6 py-2 mt-8">
+        <div className="bg-blue-50 p-4 rounded-sm">
+          <p className="font-bold text-xl sm:text-2xl mb-3">
+            Signup as a Tutor
+          </p>
+          <p className="mb-3">
+            If you&apos;re an expert at marketing, sales, web design or even
+            video editing and have a proven system of getting clients who need
+            your services then you can share your knowledge on Infomart and get
+            PAID. There are affiliates who are ready to refer your courses to
+            people.
           </p>
           <button className="bg-blue-500 text-white font-semibold py-1 px-2 rounded-sm mt-3">
             Signup as an Affiliate

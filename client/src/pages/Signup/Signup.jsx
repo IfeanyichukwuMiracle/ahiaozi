@@ -1,4 +1,4 @@
-import { Footer } from "../../components";
+import { Footer, Header } from "../../components";
 import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import googleIcon from "../../assets/google.png";
@@ -64,6 +64,7 @@ const Signup = () => {
   return (
     <>
       <Toaster />
+      <Header />
       <section className="w-full py-16 flex justify-center items-center">
         <form
           className="bg-[#fefefe] shadow-md w-max rounded-md p-6"

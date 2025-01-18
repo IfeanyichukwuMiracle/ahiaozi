@@ -18,9 +18,6 @@ const Menu = ({ setShowMenu, showMenu }) => {
     toast.success("Logged out!");
   }
 
-  async function becomeAffiliate() {}
-  async function becomeTutor() {}
-
   return (
     <>
       <Toaster />
@@ -48,26 +45,29 @@ const Menu = ({ setShowMenu, showMenu }) => {
         <div className="flex flex-col mt-7 gap-6 text-lg">
           <Link
             to={`/`}
-            onClick={() =>
-              window.scroll({ top: 0, left: 0, behavior: "smooth" })
-            }
+            onClick={() => {
+              window.scroll({ top: 0, left: 0, behavior: "smooth" });
+              setShowMenu(false);
+            }}
           >
             <nav>Home</nav>
           </Link>
           <Link
             to={`/cart`}
-            onClick={() =>
-              window.scroll({ top: 0, left: 0, behavior: "smooth" })
-            }
+            onClick={() => {
+              window.scroll({ top: 0, left: 0, behavior: "smooth" });
+              setShowMenu(false);
+            }}
           >
             <nav>Cart</nav>
           </Link>
           {state.token && (
             <Link
               to={`/my-courses`}
-              onClick={() =>
-                window.scroll({ top: 0, left: 0, behavior: "smooth" })
-              }
+              onClick={() => {
+                window.scroll({ top: 0, left: 0, behavior: "smooth" });
+                setShowMenu(false);
+              }}
             >
               <nav>My Courses</nav>
             </Link>
@@ -190,12 +190,22 @@ const Menu = ({ setShowMenu, showMenu }) => {
             </div>
           ) : (
             <>
-              <nav className="cursor-pointer" onClick={becomeAffiliate}>
-                Become an Affiliate
-              </nav>
-              <nav className="cursor-pointer" onClick={becomeTutor}>
-                Become a Tutor
-              </nav>
+              <Link to={`/auth/signup?role=affiliate`}>
+                <nav
+                  className="cursor-pointer text-black"
+                  onClick={() => setShowMenu(false)}
+                >
+                  Signup as an Affiliate
+                </nav>
+              </Link>
+              <Link to={`/auth/signup?role=tutor`}>
+                <nav
+                  className="cursor-pointer text-black"
+                  onClick={() => setShowMenu(false)}
+                >
+                  Signup as a Tutor
+                </nav>
+              </Link>
             </>
           )}
         </div>
@@ -205,6 +215,7 @@ const Menu = ({ setShowMenu, showMenu }) => {
               to={`/auth/signup`}
               onClick={() => {
                 window.scroll({ top: 0, left: 0, behavior: "smooth" });
+                setShowMenu(false);
               }}
             >
               <button className="bg-blue-600 hover:bg-blue-500 transition-all text-white font-semibold w-full py-2 rounded-sm">
@@ -213,7 +224,10 @@ const Menu = ({ setShowMenu, showMenu }) => {
             </Link>
           ) : (
             <button
-              onClick={logout}
+              onClick={() => {
+                setShowMenu();
+                logout();
+              }}
               className="bg-red-500 hover:bg-red-400 transition-all text-white font-semibold w-full py-2 rounded-sm"
             >
               Logout
