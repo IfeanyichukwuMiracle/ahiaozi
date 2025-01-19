@@ -14,6 +14,8 @@ import AuthRouter from "./routes/auth";
 import CourseRouter from "./routes/courses";
 import UserRouter from "./routes/user";
 import CartRouter from "./routes/cart";
+import SectionRouter from "./routes/sections";
+import LessonRouter from "./routes/lessons";
 
 // Using json middleware
 app.use(express.json());
@@ -28,6 +30,8 @@ app.use("/api/v0/auth/", AuthRouter);
 app.use("/api/v0/users/", UserRouter);
 app.use("/api/v0/courses/", CourseRouter);
 app.use("/api/v0/cart/", CartRouter);
+app.use("/api/v0/section/", SectionRouter);
+app.use("/api/v0/lesson/", LessonRouter);
 
 // If route is not found
 app.use(notFound);

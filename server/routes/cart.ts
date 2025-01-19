@@ -1,5 +1,5 @@
 const express = require("express");
-const CartRouter = express.Router;
+const CartRouter = express.Router();
 
 import auth from "../middlewares/auth";
 
