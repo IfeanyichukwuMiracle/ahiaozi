@@ -12,6 +12,10 @@ const lessonSchema = new mongoose.Schema(
       required: true,
       ref: "Sections",
     },
+    number: {
+      type: Number,
+      required: true,
+    },
     title: {
       type: String,
       required: true,

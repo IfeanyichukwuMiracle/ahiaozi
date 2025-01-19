@@ -1,6 +1,7 @@
 import { HttpStatusCodes as Stat } from "../config/http";
 
 import { SectionModel as Section } from "../models/sections";
+import { LessonModel as Lesson } from "../models/lessons";
 
 import { Request, Response } from "express";
 
@@ -9,7 +10,7 @@ export const getSections = async (
   res: Response
 ): Promise<void> => {
   try {
-    const sections = await Section.find({});
+    const sections = await Section.find({}).sort("number");
 
     res.status(Stat.OK).json({ msg: `successful`, sections });
   } catch (err) {
@@ -25,7 +26,7 @@ export const createSection = async (
     const { course_id } = req.query;
     const { name, number } = req.body;
 
-    const sectionExists = await Section.find({ course_id, number });
+    const sectionExists = await Section.findOne({ course: course_id, number });
 
     if (sectionExists) {
       res
@@ -36,7 +37,52 @@ export const createSection = async (
 
     const section = await Section.create({ course: course_id, name, number });
 
-    res.status(Stat.OK).json({ msg: `section created successfully`, section });
+    res
+      .status(Stat.Created)
+      .json({ msg: `section created successfully`, section });
+  } catch (err) {
+    res.status(Stat.ServerError).json({ msg: "Oops! An error occurred" });
+  }
+};
+
+export const updateSection = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const { section_id } = req.query;
+    const { name, number } = req.body;
+
+    if (!name || !number || !section_id) {
+      res
+        .status(Stat.NotFound)
+        .json({ msg: `Please fill in what is required` });
+    }
+
+    const section = await Section.findByIdAndUpdate(section_id, {
+      name,
+      number,
+    });
+
+    res.status(Stat.OK).json({ msg: `successful`, section });
+  } catch (err) {
+    res.status(Stat.ServerError).json({ msg: "Oops! An error occurred", err });
+  }
+};
+
+export const removeSection = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const { section_id } = req.query;
+
+    // deleting all lessons under section
+    await Lesson.deleteMany({ section: section_id });
+
+    const sections = await Section.findByIdAndDelete(section_id);
+
+    res.status(Stat.OK).json({ msg: `successful`, sections });
   } catch (err) {
     res.status(Stat.ServerError).json({ msg: "Oops! An error occurred" });
   }
