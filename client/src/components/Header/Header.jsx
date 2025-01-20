@@ -6,10 +6,12 @@ import { Context } from "../../context/AppContext";
 import toast, { Toaster } from "react-hot-toast";
 
 import { AnimatePresence, motion } from "motion/react";
+import Search from "../Search/Search";
 
 const Header = ({ sticky }) => {
   const [showCart, setShowCart] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
   const { state, dispatch } = useContext(Context);
   const [dashboard, setDashboard] = useState(false);
 
@@ -27,6 +29,10 @@ const Header = ({ sticky }) => {
       {/* popup cart */}
       <AnimatePresence>
         {showCart && <Cart setShowCart={setShowCart} key={"box"} />}
+      </AnimatePresence>
+      {/* popup search */}
+      <AnimatePresence>
+        {showSearch && <Search setShowSearch={setShowSearch} key={"box"} />}
       </AnimatePresence>
       {/* popup menu */}
       <Menu showMenu={showMenu} setShowMenu={setShowMenu} />
@@ -195,6 +201,26 @@ const Header = ({ sticky }) => {
           )}
         </div>
         <div className="flex items-center gap-4">
+          <div
+            className="rounded-sm cursor-pointer py-1 hidden sm:flex items-center gap-1"
+            onClick={() => setShowSearch(true)}
+          >
+            <p className="block sm:hidden md:block">Search</p>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+              />
+            </svg>
+          </div>
           <div className="relative" onClick={() => setShowCart(true)}>
             <p className="absolute -top-3 -right-2 text-sm bg-red-500 w-5 h-5 flex items-center justify-center rounded-full font-semibold text-white">
               {state.cart.length}
@@ -234,21 +260,44 @@ const Header = ({ sticky }) => {
             </Link>
           )}
         </div>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.7}
-          stroke="currentColor"
-          className="size-6 sm:hidden block cursor-pointer"
-          onClick={() => setShowMenu(true)}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-          />
-        </svg>
+
+        <div className="sm:hidden flex gap-2 items-center">
+          <div
+            className="rounded-sm cursor-pointer p-1 flex items-center gap-1"
+            onClick={() => setShowSearch(true)}
+          >
+            <p className="block sm:hidden md:block">Search</p>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+              />
+            </svg>
+          </div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.7}
+            stroke="currentColor"
+            className="size-6 sm:hidden block cursor-pointer"
+            onClick={() => setShowMenu(true)}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
+        </div>
       </header>
     </>
   );
