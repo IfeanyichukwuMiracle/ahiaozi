@@ -1,5 +1,5 @@
 import { Card, Footer, Header } from "../../components";
-import courseImg from "../../assets/course.jpg";
+import courseImg from "../../assets/course.webp";
 import { Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../../context/AppContext";

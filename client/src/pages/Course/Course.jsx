@@ -1,5 +1,5 @@
 import { Card, Footer, Header, Preview } from "../../components";
-import courseImg from "../../assets/course-2.jpg";
+import courseImg from "../../assets/course-2.webp";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useContext, useState } from "react";
 import { useQuery } from "@tanstack/react-query";

@@ -7,7 +7,7 @@ import { getCourses } from "../../queryFns.js";
 
 import { motion } from "motion/react";
 
-import course_img from "../../assets/course.jpg";
+import course_img from "../../assets/course.webp";
 
 import profile from "../../assets/profile.jpg";
 import profile2 from "../../assets/profile-1.jpg";

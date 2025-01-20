@@ -1,4 +1,4 @@
-import course_img from "../../assets/course.jpg";
+import course_img from "../../assets/course.webp";
 
 const Card = ({ name, tutor, enrolled, price }) => {
   return (
