@@ -3,7 +3,7 @@ import { MyCourse, Footer, Header } from "../../components";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import courseImg from "../../assets/course.jpg";
+import courseImg from "../../assets/course.webp";
 
 const MyCourses = () => {
   const { type } = useParams();
