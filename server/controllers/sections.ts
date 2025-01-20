@@ -53,16 +53,18 @@ export const updateSection = async (
     const { section_id } = req.query;
     const { name, number } = req.body;
 
-    if (!name || !number || !section_id) {
+    if (!name && !number && !section_id) {
       res
         .status(Stat.NotFound)
         .json({ msg: `Please fill in what is required` });
+      return;
     }
 
-    const section = await Section.findByIdAndUpdate(section_id, {
-      name,
-      number,
-    });
+    const section = await Section.findByIdAndUpdate(
+      section_id,
+      { ...req.body },
+      { runValidators: true, new: true }
+    );
 
     res.status(Stat.OK).json({ msg: `successful`, section });
   } catch (err) {

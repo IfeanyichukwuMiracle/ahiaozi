@@ -1,6 +1,8 @@
 import { HttpStatusCodes as Stat } from "../config/http";
 
 import { courseModel as Course } from "../models/courses";
+import { SectionModel as Section } from "../models/sections";
+import { LessonModel as Lesson } from "../models/lessons";
 
 import { Request, Response } from "express";
 
@@ -185,6 +187,8 @@ export const deleteCourse = async (
   try {
     const { id } = req.params;
 
+    await Section.deleteMany({ course: id });
+    await Lesson.deleteMany({ course: id });
     const course = await Course.findByIdAndDelete(id);
 
     if (!course) {

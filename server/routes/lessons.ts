@@ -1,8 +1,8 @@
 const express = require("express");
 const LessonRouter = express.Router();
 
-import { addLesson } from "../controllers/lessons";
+import { addLesson, getLessons } from "../controllers/lessons";
 
-LessonRouter.post("/", addLesson);
+LessonRouter.get("/", getLessons).post("/", addLesson);
 
 export default LessonRouter;

@@ -30,8 +30,8 @@ app.use("/api/v0/auth/", AuthRouter);
 app.use("/api/v0/users/", UserRouter);
 app.use("/api/v0/courses/", CourseRouter);
 app.use("/api/v0/cart/", CartRouter);
-app.use("/api/v0/section/", SectionRouter);
-app.use("/api/v0/lesson/", LessonRouter);
+app.use("/api/v0/sections/", SectionRouter);
+app.use("/api/v0/lessons/", LessonRouter);
 
 // If route is not found
 app.use(notFound);
