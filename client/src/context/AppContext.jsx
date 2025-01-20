@@ -31,6 +31,9 @@ const reducer = (state, action) => {
     );
     return { ...state, cart: [...newCart] };
   }
+  if (action.type === "empty_cart") {
+    return { ...state, cart: [] };
+  }
   if (action.type === "logout") {
     return { ...state, token: "", role: "customer" };
   }

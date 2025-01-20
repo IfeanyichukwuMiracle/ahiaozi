@@ -8,13 +8,18 @@ const CheckoutProtector = ({ children }) => {
   const [showPage, setshowPage] = useState(false);
 
   useEffect(() => {
-    if (state.token && state.cart.length > 0) {
-      setshowPage(true);
-      return;
-    } else {
+    if (state.cart.length <= 0) {
       setshowPage(false);
       navigate("/cart");
+      return;
     }
+    if (!state.token) {
+      setshowPage(false);
+      navigate("/auth/login");
+      return;
+    }
+    setshowPage(true);
+    return;
   }, [state]);
 
   if (showPage) return <>{children}</>;
