@@ -22,11 +22,11 @@ const lessonSchema = new mongoose.Schema(
     },
     video: {
       type: String,
-      required: true,
+      // required: true,
     },
     duration: {
       type: String,
-      required: true,
+      // required: true,
     },
   },
   { timestamps: true }

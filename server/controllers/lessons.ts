@@ -1,4 +1,5 @@
-import { HttpStatusCodes as Stat } from "../config/http";
+import { HttpStatusCodes as Stat } from "../utils/http";
+import { getVideoDuration } from "../utils/duration";
 
 import { LessonModel as Lesson } from "../models/lessons";
 
@@ -35,7 +36,11 @@ export const getLessons = async (
 export const addLesson = async (req: Request, res: Response): Promise<void> => {
   try {
     const { course_id, section_id } = req.query;
-    const { number, title, video, duration } = req.body;
+    const { number, title } = req.body;
+
+    const video = req?.file?.path;
+
+    const duration = await getVideoDuration(video);
 
     const lesson = await Lesson.create({
       course: course_id,

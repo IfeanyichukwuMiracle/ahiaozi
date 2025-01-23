@@ -3,6 +3,9 @@ const LessonRouter = express.Router();
 
 import { addLesson, getLessons } from "../controllers/lessons";
 
-LessonRouter.get("/", getLessons).post("/", addLesson);
+import auth from "../middlewares/auth";
+import { upload } from "../middlewares/upload";
+
+LessonRouter.get("/", getLessons).post("/", upload.single("video"), addLesson);
 
 export default LessonRouter;

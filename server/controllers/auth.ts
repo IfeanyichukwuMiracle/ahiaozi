@@ -3,7 +3,7 @@ require("dotenv").config();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-import { HttpStatusCodes as Stat } from "../config/http";
+import { HttpStatusCodes as Stat } from "../utils/http";
 
 import { userModel as User } from "../models/user";
 
@@ -57,9 +57,13 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
 
     const newUser = await User.create({ ...dataObj });
 
-    const token = jwt.sign({ id: newUser?._id, role: newUser?.role }, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_LIFETIME,
-    });
+    const token = jwt.sign(
+      { id: newUser?._id, role: newUser?.role },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: process.env.JWT_LIFETIME,
+      }
+    );
 
     res
       .status(Stat.Created)

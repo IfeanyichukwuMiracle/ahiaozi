@@ -1,4 +1,4 @@
-import { HttpStatusCodes as Stat } from "../config/http";
+import { HttpStatusCodes as Stat } from "../utils/http";
 
 import { WishListModel as WishList } from "../models/wishlist";
 

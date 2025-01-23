@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const jwt = require("jsonwebtoken");
 
-import { HttpStatusCodes as Stat } from "../config/http";
+import { HttpStatusCodes as Stat } from "../utils/http";
 
 import { Request, Response, NextFunction } from "express";
 

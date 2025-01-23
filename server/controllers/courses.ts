@@ -1,4 +1,4 @@
-import { HttpStatusCodes as Stat } from "../config/http";
+import { HttpStatusCodes as Stat } from "../utils/http";
 
 import { courseModel as Course } from "../models/courses";
 import { SectionModel as Section } from "../models/sections";

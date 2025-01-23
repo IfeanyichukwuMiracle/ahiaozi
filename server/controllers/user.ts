@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 
-import { HttpStatusCodes as Stat } from "../config/http";
+import { HttpStatusCodes as Stat } from "../utils/http";
 
 import { userModel as User } from "../models/user";
 
