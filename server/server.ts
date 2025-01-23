@@ -17,6 +17,7 @@ import CartRouter from "./routes/cart";
 import SectionRouter from "./routes/sections";
 import LessonRouter from "./routes/lessons";
 import WishListRouter from "./routes/wishlist";
+import SearchRouter from "./routes/search";
 
 // Using json middleware
 app.use(express.json());
@@ -28,6 +29,7 @@ app.use(xss());
 
 // Route middlewares
 app.use("/api/v0/auth/", AuthRouter);
+app.use("/api/v0/search/", SearchRouter);
 app.use("/api/v0/users/", UserRouter);
 app.use("/api/v0/courses/", CourseRouter);
 app.use("/api/v0/cart/", CartRouter);
