@@ -15,12 +15,15 @@ interface BodyType {
   email: string;
   password: string;
   cpassword?: string;
+  role?: string;
 }
 
 export const signup = async (req: Request, res: Response): Promise<void> => {
   try {
     const { firstname, lastname, email, password, cpassword }: BodyType =
       req.body;
+
+    const { role }: Partial<BodyType> = req.query;
 
     if (!firstname || !lastname || !email || !password || !cpassword) {
       res.status(Stat.NotFound).json({ msg: "Please input required fields" });
@@ -52,6 +55,7 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
       firstname: firstname?.toLowerCase(),
       lastname: lastname?.toLowerCase(),
       email: email?.toLowerCase(),
+      role: role?.toLowerCase(),
       password: hashedPassword,
     };
 
