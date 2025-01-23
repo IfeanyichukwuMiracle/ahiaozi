@@ -266,7 +266,7 @@ const Header = ({ sticky }) => {
             className="rounded-sm cursor-pointer p-1 flex items-center gap-1"
             onClick={() => setShowSearch(true)}
           >
-            <p className="block sm:hidden md:block">Search</p>
+            <p className="hidden md:block">Search</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
