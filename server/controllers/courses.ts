@@ -70,30 +70,17 @@ export const createCourse = async (
   res: Response
 ): Promise<void> => {
   try {
-    const {
-      name,
-      price,
-      description,
-      thumbnail,
-      previewVideo,
-      language,
-      commision,
-    } = req.body;
+    const { name, price, description, language, commision } = req.body;
 
+    // Files
+    const previewVideo = req?.files?.previewVideo[0]?.path;
+    const thumbnail = req?.files?.thumbnail[0]?.path;
+
+    // User
     const tutor = req?.user?.id;
-
     const authority = req?.user?.role;
 
-    if (
-      !name ||
-      !price ||
-      !tutor ||
-      !description ||
-      !thumbnail ||
-      !previewVideo ||
-      !language ||
-      !commision
-    ) {
+    if (!name || !price || !tutor || !description || !language || !commision) {
       res.status(Stat.NotFound).json({ msg: "Please input required fields" });
       return;
     }
@@ -108,6 +95,8 @@ export const createCourse = async (
     const courseObj = {
       ...req.body,
       tutor,
+      previewVideo,
+      thumbnail,
       name: name.toLowerCase(),
       description: description.toLowerCase(),
       language: language.toLowerCase(),

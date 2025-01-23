@@ -10,10 +10,16 @@ import {
 } from "../controllers/courses";
 
 import auth from "../middlewares/auth";
+import { upload } from "../middlewares/upload";
+
+const uploads = upload.fields([
+  { name: "previewVideo", maxCount: 1 },
+  { name: "thumbnail", maxCount: 1 },
+]);
 
 CourseRouter.get("/", getAllCourses)
   .get("/:id", getCourse)
-  .post("/", auth, createCourse)
+  .post("/", [uploads, auth], createCourse)
   .patch("/:id", updateCourse)
   .delete("/:id", deleteCourse);
 

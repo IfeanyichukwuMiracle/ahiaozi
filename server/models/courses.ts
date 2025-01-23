@@ -25,11 +25,9 @@ const courseSchema = new mongoose.Schema(
     },
     thumbnail: {
       type: String,
-      required: true,
     },
     previewVideo: {
       type: String,
-      required: true,
     },
     language: {
       type: String,
@@ -40,12 +38,6 @@ const courseSchema = new mongoose.Schema(
       required: true,
       default: 0,
     },
-    moduleContent: [
-      {
-        moduleName: String,
-        moduleVideo: String,
-      },
-    ],
   },
   { timestamps: true }
 );
