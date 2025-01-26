@@ -115,40 +115,38 @@ export const updateCourse = async (
 ): Promise<void> => {
   try {
     const {
-      body: {
-        name,
-        price,
-        description,
-        thumbnail,
-        previewVideo,
-        language,
-        commision,
-      },
+      body: { name, price, description, language, commision },
       params: { id },
     } = req;
+
     const tutor = req?.user?.id;
+
+    const previewVideo =
+      req.files?.previewVideo && req.files.previewVideo[0].path;
+    const thumbnail = req.files?.thumbnail && req.files.thumbnail[0].path;
+
+    const courseObj = {
+      ...req.body,
+      tutor,
+      thumbnail,
+      previewVideo,
+      name: name?.toLowerCase(),
+      description: description?.toLowerCase(),
+      language: language?.toLowerCase(),
+    };
 
     if (
       !name &&
       !price &&
       !tutor &&
       !description &&
-      !thumbnail &&
-      !previewVideo &&
+      !description &&
       !language &&
       !commision
     ) {
       res.status(Stat.NotFound).json({ msg: "All fields cannot be empty" });
       return;
     }
-
-    const courseObj = {
-      ...req.body,
-      tutor,
-      name: name.toLowerCase(),
-      description: description.toLowerCase(),
-      language: language.toLowerCase(),
-    };
 
     const updatedCourse = await Course.findByIdAndUpdate(
       id,
@@ -165,7 +163,7 @@ export const updateCourse = async (
 
     res.status(Stat.OK).json({ msg: "successful", updatedCourse });
   } catch (err) {
-    res.status(Stat.ServerError).json({ msg: "Oops! An error occurred" });
+    res.status(Stat.ServerError).json({ msg: "Oops! An error occurred", err });
   }
 };
 

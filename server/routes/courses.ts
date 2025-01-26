@@ -20,7 +20,7 @@ const uploads = upload.fields([
 CourseRouter.get("/", getAllCourses)
   .get("/:id", getCourse)
   .post("/", [uploads, auth], createCourse)
-  .patch("/:id", updateCourse)
+  .patch("/:id", [uploads, auth], updateCourse)
   .delete("/:id", deleteCourse);
 
 export default CourseRouter;
