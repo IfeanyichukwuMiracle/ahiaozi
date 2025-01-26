@@ -64,7 +64,11 @@ export const updateLesson = async (
   try {
     const { lesson_id } = req.query;
 
-    const { number, title, video } = req.body;
+    const { number, title } = req.body;
+
+    const video = req?.file && req?.file?.path;
+
+    const duration = req?.file && (await getVideoDuration(video));
 
     if (!number && !title && !video) {
       res
@@ -75,7 +79,7 @@ export const updateLesson = async (
 
     const lesson = await Lesson.findByIdAndUpdate(
       lesson_id,
-      { ...req.body },
+      { ...req.body, video, duration },
       { runValidators: true, new: true }
     );
 

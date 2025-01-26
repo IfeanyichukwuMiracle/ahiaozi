@@ -21,6 +21,6 @@ CourseRouter.get("/", getAllCourses)
   .get("/:id", getCourse)
   .post("/", [uploads, auth], createCourse)
   .patch("/:id", [uploads, auth], updateCourse)
-  .delete("/:id", deleteCourse);
+  .delete("/:id", auth, deleteCourse);
 
 export default CourseRouter;

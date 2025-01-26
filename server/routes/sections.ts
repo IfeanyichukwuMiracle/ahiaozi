@@ -8,9 +8,11 @@ import {
   removeSection,
 } from "../controllers/sections";
 
+import auth from "../middlewares/auth";
+
 SectionRouter.get("/", getSections)
-  .post("/", createSection)
-  .patch("/", updateSection)
-  .delete("/", removeSection);
+  .post("/", auth, createSection)
+  .patch("/", auth, updateSection)
+  .delete("/", auth, removeSection);
 
 export default SectionRouter;
