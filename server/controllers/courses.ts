@@ -1,4 +1,7 @@
 import { HttpStatusCodes as Stat } from "../utils/http";
+import { getVideoDuration } from "../utils/duration";
+
+import { cloudinary } from "../middlewares/upload";
 
 import { courseModel as Course } from "../models/courses";
 import { SectionModel as Section } from "../models/sections";
@@ -72,9 +75,35 @@ export const createCourse = async (
   try {
     const { name, price, description, language, commision } = req.body;
 
-    // Files
-    const previewVideo = req?.files?.previewVideo[0]?.path;
-    const thumbnail = req?.files?.thumbnail[0]?.path;
+    // getting preview video file
+    const previewFileName = req?.files?.previewVideo?.[0]?.originalname;
+    const previewFilePath = req?.files?.previewVideo?.[0]?.path;
+
+    // getting thumbnail file
+    const thumbFileName = req?.files?.thumbnail?.[0]?.originalname;
+    const thumbFilePath = req?.files?.thumbnail[0]?.path;
+
+    // save preview video to cloud
+    const previewUploadResult = await cloudinary.uploader.upload(
+      previewFilePath,
+      {
+        folder: "ahiaozi_course_preview_videos",
+        resource_type: "video",
+        public_id: previewFileName,
+      }
+    );
+
+    // save thumbnail to cloud
+    const thumbUploadResult = await cloudinary.uploader.upload(thumbFilePath, {
+      folder: "ahiaozi_course_thumbnails",
+      resource_type: "image",
+      public_id: thumbFileName,
+    });
+    const previewVideo = previewUploadResult.url;
+    const thumbnail = thumbUploadResult.url;
+
+    // getting duration of preview video
+    const duration = await getVideoDuration(previewFilePath);
 
     // User
     const tutor = req?.user?.id;
@@ -97,6 +126,7 @@ export const createCourse = async (
       tutor,
       previewVideo,
       thumbnail,
+      duration,
       name: name.toLowerCase(),
       description: description.toLowerCase(),
       language: language.toLowerCase(),
@@ -121,24 +151,12 @@ export const updateCourse = async (
 
     const tutor = req?.user?.id;
 
-    const previewVideo =
-      req.files?.previewVideo && req.files.previewVideo[0].path;
-    const thumbnail = req.files?.thumbnail && req.files.thumbnail[0].path;
-
-    const courseObj = {
-      ...req.body,
-      tutor,
-      thumbnail,
-      previewVideo,
-      name: name?.toLowerCase(),
-      description: description?.toLowerCase(),
-      language: language?.toLowerCase(),
-    };
-
     if (
       !name &&
       !price &&
       !tutor &&
+      !req?.files?.previewVideo &&
+      !req?.files?.thumbnail &&
       !description &&
       !description &&
       !language &&
@@ -146,6 +164,48 @@ export const updateCourse = async (
     ) {
       res.status(Stat.NotFound).json({ msg: "All fields cannot be empty" });
       return;
+    }
+
+    const courseObj = {
+      ...req.body,
+      tutor,
+      name: name?.toLowerCase(),
+      description: description?.toLowerCase(),
+      language: language?.toLowerCase(),
+    };
+
+    // getting and uploading preview video file if exists
+    if (req.files?.previewVideo) {
+      const previewFileName = req?.files?.previewVideo?.[0]?.originalname;
+      const previewFilePath = req?.files?.previewVideo?.[0]?.path;
+
+      // save preview video to cloud
+      const previewUploadResult = await cloudinary.uploader.upload(
+        previewFilePath,
+        {
+          folder: "ahiaozi_course_preview_videos",
+          resource_type: "video",
+          public_id: previewFileName,
+        }
+      );
+      courseObj.duration = await getVideoDuration(previewFilePath);
+      courseObj.previewVideo = previewUploadResult.url;
+    }
+
+    // getting thumbnail file
+    if (req.files?.thumbnail) {
+      const thumbFileName = req?.files?.thumbnail?.[0]?.originalname;
+      const thumbFilePath = req?.files?.thumbnail[0]?.path;
+      // save thumbnail to cloud
+      const thumbUploadResult = await cloudinary.uploader.upload(
+        thumbFilePath,
+        {
+          folder: "ahiaozi_course_thumbnails",
+          resource_type: "image",
+          public_id: thumbFileName,
+        }
+      );
+      courseObj.thumbnail = thumbUploadResult.url;
     }
 
     const updatedCourse = await Course.findByIdAndUpdate(

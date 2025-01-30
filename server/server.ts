@@ -28,14 +28,15 @@ app.use(helmet());
 app.use(xss());
 
 // Route middlewares
-app.use("/api/v0/auth/", AuthRouter);
-app.use("/api/v0/search/", SearchRouter);
-app.use("/api/v0/users/", UserRouter);
-app.use("/api/v0/courses/", CourseRouter);
-app.use("/api/v0/cart/", CartRouter);
-app.use("/api/v0/sections/", SectionRouter);
-app.use("/api/v0/lessons/", LessonRouter);
-app.use("/api/v0/wishlists/", WishListRouter);
+app
+  .use("/api/v0/auth/", AuthRouter)
+  .use("/api/v0/search/", SearchRouter)
+  .use("/api/v0/users/", UserRouter)
+  .use("/api/v0/courses/", CourseRouter)
+  .use("/api/v0/cart/", CartRouter)
+  .use("/api/v0/sections/", SectionRouter)
+  .use("/api/v0/lessons/", LessonRouter)
+  .use("/api/v0/wishlists/", WishListRouter);
 
 // If route is not found
 app.use(notFound);

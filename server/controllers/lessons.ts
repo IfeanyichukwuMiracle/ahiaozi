@@ -1,6 +1,8 @@
 import { HttpStatusCodes as Stat } from "../utils/http";
 import { getVideoDuration } from "../utils/duration";
 
+import { cloudinary } from "../middlewares/upload";
+
 import { LessonModel as Lesson } from "../models/lessons";
 
 import { Request, Response } from "express";
@@ -38,9 +40,16 @@ export const addLesson = async (req: Request, res: Response): Promise<void> => {
     const { course_id, section_id } = req.query;
     const { number, title } = req.body;
 
-    const video = req?.file?.path;
+    const fileName = req?.file?.originalname?.replace(/[\s\(\)\.com]/g, "_");
+    const filePath = req?.file?.path;
 
-    const duration = await getVideoDuration(video);
+    const uploadResult = await cloudinary.uploader.upload(filePath, {
+      folder: "ahiaozi_lesson_videos",
+      resource_type: "video",
+      public_id: fileName,
+    });
+    const video = uploadResult.url;
+    const duration = await getVideoDuration(filePath);
 
     const lesson = await Lesson.create({
       course: course_id,

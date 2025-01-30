@@ -29,6 +29,9 @@ const courseSchema = new mongoose.Schema(
     previewVideo: {
       type: String,
     },
+    duration: {
+      type: String,
+    },
     language: {
       type: String,
       required: true,
