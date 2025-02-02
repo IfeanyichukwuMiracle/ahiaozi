@@ -1,3 +1,5 @@
+import path from "path";
+
 import { HttpStatusCodes as Stat } from "../utils/http";
 import { getVideoDuration } from "../utils/duration";
 
@@ -40,15 +42,29 @@ export const addLesson = async (req: Request, res: Response): Promise<void> => {
     const { course_id, section_id } = req.query;
     const { number, title } = req.body;
 
-    const fileName = req?.file?.originalname?.replace(/[\s\(\)\.com]/g, "_");
     const filePath = req?.file?.path;
 
+    // Checking extension
+    const videoExt = path.parse(req?.file?.originalname).ext;
+    if (videoExt !== ".mp4") {
+      res.status(Stat.BadRequest).json({ msg: "File not format" });
+      return;
+    }
+
+    // upload video to cloudinary
     const uploadResult = await cloudinary.uploader.upload(filePath, {
       folder: "ahiaozi_lesson_videos",
       resource_type: "video",
-      public_id: fileName,
     });
-    const video = uploadResult.url;
+    // Optimizing video
+    const video = cloudinary.url(`${uploadResult.public_id}.mp4`, {
+      resource_type: "video",
+      transformation: [
+        { width: 1000, crop: "scale" },
+        { quality: "auto" },
+        { fetch_format: "auto" },
+      ],
+    });
     const duration = await getVideoDuration(filePath);
 
     const lesson = await Lesson.create({
@@ -75,11 +91,37 @@ export const updateLesson = async (
 
     const { number, title } = req.body;
 
-    const video = req?.file && req?.file?.path;
+    const courseObj = { ...req.body };
 
-    const duration = req?.file && (await getVideoDuration(video));
+    if (req.file) {
+      const videoPath = req?.file?.path;
 
-    if (!number && !title && !video) {
+      // Checking extension
+      const videoExt = path.parse(req?.file?.originalname).ext;
+      if (videoExt !== ".mp4") {
+        res.status(Stat.BadRequest).json({ msg: "File not format" });
+        return;
+      }
+
+      // save preview video to cloud
+      const videoUploadResult = await cloudinary.uploader.upload(videoPath, {
+        folder: "ahiaozi_lesson_videos",
+        resource_type: "video",
+      });
+      // Optimizing video
+      const video = cloudinary.url(`${videoUploadResult.public_id}.mp4`, {
+        resource_type: "video",
+        transformation: [
+          { width: 1000, crop: "scale" },
+          { quality: "auto" },
+          { fetch_format: "auto" },
+        ],
+      });
+      courseObj.duration = await getVideoDuration(videoPath);
+      courseObj.video = video;
+    }
+
+    if (!number && !title) {
       res
         .status(Stat.NotFound)
         .json({ msg: `Please fill in what is required` });
@@ -88,7 +130,7 @@ export const updateLesson = async (
 
     const lesson = await Lesson.findByIdAndUpdate(
       lesson_id,
-      { ...req.body, video, duration },
+      { ...courseObj },
       { runValidators: true, new: true }
     );
 

@@ -98,6 +98,7 @@ export const createCourse = async (
       return;
     }
 
+    // Checking extension
     const previewExt = path.parse(
       req?.files?.previewVideo?.[0]?.originalname
     ).ext;
@@ -198,8 +199,16 @@ export const updateCourse = async (
 
     // getting and uploading preview video file if exists
     if (req.files?.previewVideo) {
-      const previewFileName = req?.files?.previewVideo?.[0]?.originalname;
       const previewFilePath = req?.files?.previewVideo?.[0]?.path;
+
+      // Checking extension
+      const previewExt = path.parse(
+        req?.files?.previewVideo?.[0]?.originalname
+      ).ext;
+      if (previewExt !== ".mp4") {
+        res.status(Stat.BadRequest).json({ msg: "File not format" });
+        return;
+      }
 
       // save preview video to cloud
       const previewUploadResult = await cloudinary.uploader.upload(
@@ -207,16 +216,26 @@ export const updateCourse = async (
         {
           folder: "ahiaozi_course_preview_videos",
           resource_type: "video",
-          public_id: previewFileName,
+        }
+      );
+      // Optimizing video
+      const previewVideo = cloudinary.url(
+        `${previewUploadResult.public_id}.mp4`,
+        {
+          resource_type: "video",
+          transformation: [
+            { width: 1000, crop: "scale" },
+            { quality: "auto" },
+            { fetch_format: "auto" },
+          ],
         }
       );
       courseObj.duration = await getVideoDuration(previewFilePath);
-      courseObj.previewVideo = previewUploadResult.url;
+      courseObj.previewVideo = previewVideo;
     }
 
     // getting thumbnail file
     if (req.files?.thumbnail) {
-      const thumbFileName = req?.files?.thumbnail?.[0]?.originalname;
       const thumbFilePath = req?.files?.thumbnail[0]?.path;
       // save thumbnail to cloud
       const thumbUploadResult = await cloudinary.uploader.upload(
@@ -224,10 +243,17 @@ export const updateCourse = async (
         {
           folder: "ahiaozi_course_thumbnails",
           resource_type: "image",
-          public_id: thumbFileName,
         }
       );
-      courseObj.thumbnail = thumbUploadResult.url;
+      // optimize image
+      const thumbnail = cloudinary.url(thumbUploadResult.public_id, {
+        transformation: [
+          { width: 1000, crop: "scale" },
+          { quality: "auto" },
+          { fetch_format: "auto" },
+        ],
+      });
+      courseObj.thumbnail = thumbnail;
     }
 
     const updatedCourse = await Course.findByIdAndUpdate(
