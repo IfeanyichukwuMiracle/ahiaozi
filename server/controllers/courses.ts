@@ -1,5 +1,8 @@
+import path from "path";
+
 import { HttpStatusCodes as Stat } from "../utils/http";
 import { getVideoDuration } from "../utils/duration";
+// import { resizeVideo } from "../utils/resizeVideo";
 
 import { cloudinary } from "../middlewares/upload";
 
@@ -75,35 +78,9 @@ export const createCourse = async (
   try {
     const { name, price, description, language, commision } = req.body;
 
-    // getting preview video file
-    const previewFileName = req?.files?.previewVideo?.[0]?.originalname;
-    const previewFilePath = req?.files?.previewVideo?.[0]?.path;
-
-    // getting thumbnail file
-    const thumbFileName = req?.files?.thumbnail?.[0]?.originalname;
+    // getting files
     const thumbFilePath = req?.files?.thumbnail[0]?.path;
-
-    // save preview video to cloud
-    const previewUploadResult = await cloudinary.uploader.upload(
-      previewFilePath,
-      {
-        folder: "ahiaozi_course_preview_videos",
-        resource_type: "video",
-        public_id: previewFileName,
-      }
-    );
-
-    // save thumbnail to cloud
-    const thumbUploadResult = await cloudinary.uploader.upload(thumbFilePath, {
-      folder: "ahiaozi_course_thumbnails",
-      resource_type: "image",
-      public_id: thumbFileName,
-    });
-    const previewVideo = previewUploadResult.url;
-    const thumbnail = thumbUploadResult.url;
-
-    // getting duration of preview video
-    const duration = await getVideoDuration(previewFilePath);
+    const previewFilePath = req?.files?.previewVideo?.[0]?.path;
 
     // User
     const tutor = req?.user?.id;
@@ -120,6 +97,51 @@ export const createCourse = async (
         .json({ msg: "Sorry, you're not authorzied to create a course" });
       return;
     }
+
+    const previewExt = path.parse(
+      req?.files?.previewVideo?.[0]?.originalname
+    ).ext;
+    if (previewExt !== ".mp4") {
+      res.status(Stat.BadRequest).json({ msg: "File not format" });
+      return;
+    }
+
+    // save preview video to cloud
+    const previewUploadResult = await cloudinary.uploader.upload(
+      previewFilePath,
+      {
+        folder: "ahiaozi_course_preview_videos",
+        resource_type: "video",
+      }
+    );
+    // Optimizing video
+    const previewVideo = cloudinary.url(
+      `${previewUploadResult.public_id}.mp4`,
+      {
+        resource_type: "video",
+        transformation: [
+          { width: 1000, crop: "scale" },
+          { quality: "auto" },
+          { fetch_format: "auto" },
+        ],
+      }
+    );
+    // getting duration of preview video
+    const duration = await getVideoDuration(previewFilePath);
+
+    // save thumbnail to cloud
+    const thumbUploadResult = await cloudinary.uploader.upload(thumbFilePath, {
+      folder: "ahiaozi_course_thumbnails",
+      resource_type: "image",
+    });
+    // optimize image
+    const thumbnail = cloudinary.url(thumbUploadResult.public_id, {
+      transformation: [
+        { width: 1000, crop: "scale" },
+        { quality: "auto" },
+        { fetch_format: "auto" },
+      ],
+    });
 
     const courseObj = {
       ...req.body,
